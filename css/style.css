@@ -42,6 +42,14 @@ footer #para_time {
     max-height: 80%;
 }
 
+hr {
+    background-color: #ddd;
+    color: #ccc;
+    height: 1px;
+    border: 0px;
+    width: 100%;
+}
+
 h1 {
     /* padding-left: 5%; */
     font-size: 18px;
