@@ -136,7 +136,16 @@
 
         function getDate()
         {
-            return $this->getTokens()[$this->format->date_offset];
+            $dateStr = $this->getTokens()[$this->format->date_offset];
+
+            $day = substr($dateStr, 6);
+            $year = substr($dateStr, 0, 4);
+            $month = substr($dateStr, 4, 2);
+
+            //$date = date_create($year . '-' . $month . '-' . $day);
+            $date = $year . '-' . $month . '-' . $day;
+
+            return $date;
         }
 
         function getBuildNum()
