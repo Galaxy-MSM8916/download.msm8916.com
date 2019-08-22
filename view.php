@@ -97,11 +97,7 @@
             if (count($releases) == 0)
                 continue;
 
-            //echo "<a href=\"?groupBy=${group}&${group}=${key}\"> <b>${key}</b></a>";
-            if ($_GET[$group] == null)
-                echo indent(3) . "<h2><a href='?". $_SERVER["QUERY_STRING"] . "&amp;${group}=${key}'><b>${key}</b></a></h2>\n";
-            else
-                echo indent(3) ."<h2><a href='?". $_SERVER["QUERY_STRING"] . "'><b>${key}</b></a></h2>\n";
+            echo indent(3) . "<h2>" . get_release_query_link($group, $key) . "</h2>" . PHP_EOL;
 
             echo indent(3) . "<table class = 'build_folder'>\n";
 
@@ -130,25 +126,26 @@
 
                 $tag = $release->tag;
                 
-                $a_r_url = "<a class = 'release_url' href='?view=" . $_GET["view"] . "&amp;tag=$tag'>";
 
                 echo indent(4) . "<tr class = 'build_tr'>\n";
 
                 if ($group != "dist")
-                    echo indent(5) . "<td class='build_dist'>" . $a_r_url . $release->getLongDist() . "</a>" . "</td>\n";
+                    echo indent(5) . "<td class='build_dist'>" . get_release_query_link("dist", $release->getLongDist()) . "</td>\n";
 
                 if ($group != "version")
-                    echo indent(5) . "<td class='build_version'>" . $a_r_url . $release->getVersion() . "</a>" . "</td>\n";
+                    echo indent(5) . "<td class='build_version'>"
+                    . get_release_query_link("version", $release->getVersion()) . "</td>\n";
 
-                echo indent(5) . "<td class='build_number'>" . $a_r_url . $release->getBuildNum() . "</a>" . "</td>\n";
+                echo indent(5) . "<td class='build_number'>" . $release->getBuildNum() . "</td>\n";
 
                 if ($group != "device")
-                    echo indent(5) . "<td class='build_device'>" . $a_r_url . $release->getDevice() . "</a>" . "</td>\n";
+                    echo indent(5) . "<td class='build_device'>" . get_release_query_link("device", $release->getDevice()) . "</td>\n";
 
                 if ($group != "date")
-                    echo indent(5) . "<td class='build_date'>" . $a_r_url . $release->getDate() . "</a>" . "</td>\n";
+                    echo indent(5) . "<td class='build_date'>" . get_release_query_link("date", $release->getDate()) . "</td>\n";
 
-                echo indent(5) . "<td class='build_dl_link'>" . $a_r_url . "View" . "</a>" . "</td>\n";
+                $tag_link = "<a class = 'release_url' href='?view=" . $_GET["view"] . "&amp;tag=$tag'>View</a>";
+                echo indent(5) . "<td class='build_dl_link'>" . $tag_link . "</td>\n";
 
                 echo indent(4) . "</tr>\n";
             }
