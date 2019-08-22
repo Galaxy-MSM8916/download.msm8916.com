@@ -18,7 +18,10 @@ tag {} - for tag styling
     --bg-color: rgba(255, 255, 255, 255);
     --border-color: rgba(237, 237, 237, 255);
     --text-color: rgba(39, 39, 39, 255);
-    --link-active-color: cornflowerblue;
+
+    --link-active-color: rgb(100, 149, 237);
+    --link-visited-color: rgba(100, 149, 237, 0.822);
+
     --body-padding: 0.5%;
 }
 
@@ -76,7 +79,7 @@ h1 {
 /*.release_url:visited,.release_url:unvisited {*/
 
 a:visited {
-    color: rebeccapurple;
+    color: var(--link-visited-color);
 }
 
 a:link {
