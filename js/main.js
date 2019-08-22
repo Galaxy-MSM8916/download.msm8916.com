@@ -16,6 +16,16 @@ function get_param($key)
     return $value;
 }
 
+function get_link($url, $text, $id=null)
+{
+    if ($id == null)
+        $link = "<a href='" + $url + "'>" + $text + "</a>";
+    else
+        $link = "<a href='" + $url + "' id='" + $id + "'>" + $text + "</a>";
+
+    return $link;
+}
+
 function set_title()
 {
     var $title = document.getElementsByTagName("title")[0].innerHTML;
