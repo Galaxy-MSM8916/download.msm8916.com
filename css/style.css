@@ -62,11 +62,15 @@ h1 {
 
 #navbar_1, #navbar_2 {
     /* background-color: antiquewhite; */
-    text-transform: uppercase;
-    text-align: none;
-    list-style-type: '> ';
+    list-style-type: none;
+    display: flex;
     /* padding-left: 5%; */
     /* display: inline;  */
+}
+
+#navbar_1 a, #navbar_2 a {
+    text-decoration: none;
+    text-transform: uppercase;
 }
 
 /*.release_url:visited,.release_url:unvisited {*/
