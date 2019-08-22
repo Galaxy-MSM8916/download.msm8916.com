@@ -253,14 +253,24 @@
         return $release;
     }
 
+    /* Return true iff all array values are equal to $testValue */
+    function test_array_values($array, $testValue = null)
+    {
+        foreach($array as $value)
+        {
+            if ($value !== $testValue)
+                return false;
+        }
+        return true;
+    }
+
    function filter_releases($releases, $constraint)
     {
+        if (test_array_values($constraint))
+            return $releases;
+
         $ret = array();
 
-        //foreach($twoDArr as $arr)
-        //{
-        //TODO: Test if all constraint values are null and
-        //      return the orig array if so
         foreach($releases as $release)
         {
             $date = $release->getDate();
@@ -279,7 +289,6 @@
 
             $ret[] = $release;
         }
-        //}
         return $ret;
     }
 
