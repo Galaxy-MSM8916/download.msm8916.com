@@ -98,15 +98,19 @@
 
             echo indent(4) . "<tr class = 'header_tr'>\n";
 
-            echo indent(5) . "<th>Distribution</th>\n";
+            if ($group != "dist")
+                echo indent(5) . "<th>Distribution</th>\n";
 
-            echo indent(5) . "<th>Version</th>\n";
+            if ($group != "version")
+                echo indent(5) . "<th>Version</th>\n";
 
             echo indent(5) . "<th>Number</th>\n";
 
-            echo indent(5) . "<th>Device</th>\n";
+            if ($group != "device")
+                echo indent(5) . "<th>Device</th>\n";
 
-            echo indent(5) . "<th>Date</th>\n";
+            if ($group != "date")
+                echo indent(5) . "<th>Date</th>\n";
 
             echo indent(4) . "</tr>\n";
 
@@ -119,15 +123,19 @@
 
                 echo indent(4) . "<tr class = 'build_tr'>\n";
 
-                echo indent(5) . "<td class='build_dist'>" . $a_r_url . $release->getLongDist() . "</a>" . "</td>\n";
+                if ($group != "dist")
+                    echo indent(5) . "<td class='build_dist'>" . $a_r_url . $release->getLongDist() . "</a>" . "</td>\n";
 
-                echo indent(5) . "<td class='build_version'>" . $a_r_url . $release->getVersion() . "</a>" . "</td>\n";
+                if ($group != "version")
+                    echo indent(5) . "<td class='build_version'>" . $a_r_url . $release->getVersion() . "</a>" . "</td>\n";
 
                 echo indent(5) . "<td class='build_number'>" . $a_r_url . $release->getBuildNum() . "</a>" . "</td>\n";
 
-                echo indent(5) . "<td class='build_device'>" . $a_r_url . $release->getDevice() . "</a>" . "</td>\n";
+                if ($group != "device")
+                    echo indent(5) . "<td class='build_device'>" . $a_r_url . $release->getDevice() . "</a>" . "</td>\n";
 
-                echo indent(5) . "<td class='build_date'>" . $a_r_url . $release->getDate() . "</a>" . "</td>\n";
+                if ($group != "date")
+                    echo indent(5) . "<td class='build_date'>" . $a_r_url . $release->getDate() . "</a>" . "</td>\n";
 
                 echo indent(4) . "</tr>\n";
             }
