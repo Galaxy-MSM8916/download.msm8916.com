@@ -45,9 +45,18 @@
         ["PHP_SELF"]=>
         string(33) "/~vincent/html/download/index.php"
     */
-    function format_release_url()
+    function get_release_query_link($key, $value, $text = null)
     {
+        //echo "<a href=\"?groupBy=${group}&${group}=${key}\"> <b>${key}</b></a>";
+        if ($text == null)
+            $text = $value;
 
+        if ($_GET[$key] == null)
+            $link = "<a href='?". $_SERVER["QUERY_STRING"] . "&amp;${key}=${value}'>${text}</a>";
+        else
+            $link = "<a href='?". $_SERVER["QUERY_STRING"] . "'>${text}</a>";
+
+        return $link;
     }
 
     // memoization for the indentation
