@@ -150,7 +150,9 @@
 
         function getBuildNum()
         {
-            return $this->getTokens()[$this->format->build_offset];
+            $build = $this->getTokens()[$this->format->build_offset];
+
+            return substr($build, 1);
         }
 
         function getDevice()
