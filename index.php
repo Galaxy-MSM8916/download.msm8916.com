@@ -21,8 +21,8 @@
 
             <!-- create the navbar-->
             <ul id="navbar_1" class="unorderedList">
-                <li> <a href="index.php?view=build_status"> Build Status </a> </li>
-                <li> <a href="index.php?view=downloads"> Downloads </a> </li>
+                <li id="nav_build_status"> <a href="index.php?view=build_status"> Build Status </a> </li>
+                <li id="nav_downloads" class = "current_tab"> <a href="index.php?view=downloads"> Downloads </a> </li>
             </ul>
         </div>
     </header>
@@ -51,8 +51,8 @@
             <?php
             ?>
             <ul id="navbar_2" class="unorderedList">
-                <li> <a href="index.php?view=about"> About </a> </li>
-                <li> <a href="index.php?view=contact"> Contact </a> </li>
+                <li id="nav_about"> <a href="index.php?view=about"> About </a> </li>
+                <li id="nav_contact"> <a href="index.php?view=contact"> Contact </a> </li>
             </ul>
             <!-- <p id="para_copy"> &copy; Vincent <?php echo date("Y"); ?> </p> -->
             <p id="para_time"> <i> This page was generated on <?php echo date("d") . "<sup>" . date("S") . "</sup>" . date(" M Y H:i:s T"); ?> </i></p>
