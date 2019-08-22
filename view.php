@@ -104,7 +104,7 @@
             if ($group != "version")
                 echo indent(5) . "<th>Version</th>\n";
 
-            echo indent(5) . "<th>Number</th>\n";
+            echo indent(5) . "<th>Build</th>\n";
 
             if ($group != "device")
                 echo indent(5) . "<th>Device</th>\n";
