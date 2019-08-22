@@ -1,0 +1,99 @@
+/*
+
+tag {} - for tag styling
+.class {} - classes styling
+#id {} - id styling
+
+*/
+
+/* dark theme
+:root {
+    --bg-color: rgba(39,40,34, 255);
+    --text-color: rgba(248, 248, 240, 255);
+    --body-padding: 0.5%;
+}
+*/
+
+:root {
+    --bg-color: rgba(255, 255, 255, 255);
+    --border-color: rgba(237, 237, 237, 255);
+    --text-color: rgba(39, 39, 39, 255);
+    --link-active-color: cornflowerblue;
+    --body-padding: 0.5%;
+}
+
+#navbar_1, #navbar_2 {
+    /* background-color: antiquewhite; */
+    text-transform: uppercase;
+    text-align: none;
+    list-style-type: '> ';
+    /* padding-left: 5%; */
+    /* display: inline;  */
+}
+
+/*.release_url:visited,.release_url:unvisited {*/
+
+a:visited {
+    color: rebeccapurple;
+}
+
+a:link {
+    color: var(--link-active-color);
+}
+
+a[class = 'release_url'] {
+    color: var(--text-color);
+    /*text-transform: uppercase;*/
+}
+
+a[class = 'release_url']:hover {
+    color: var(--link-active-color);
+}
+
+li[class ^= 'build'] {
+    list-style-type: ' > ';
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-style: outset;
+    border-width: 1px;
+    border-color: rgba(237, 237, 237, 255);
+}
+
+span[class ^= 'build'] {
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+/*
+#navbar_2 {
+    padding-top: 10%
+}
+*/
+
+#para_time {
+    text-transform: uppercase;
+    font-size: 80%;
+    text-emphasis: none;
+    color: grey;
+    /* padding-left: 5%; */
+}
+
+#body_div {
+    height: 80%;
+    max-height: 80%;
+}
+
+h1 {
+    /* padding-left: 5%; */
+}
+
+body {
+    background-color: var(--bg-color);
+    padding-left: var(--body-padding);
+    padding-right: var(--body-padding);
+    color: var(--text-color);
+}
+
+.heading {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
