@@ -94,30 +94,44 @@
             else
                 echo indent(3) ."<h2><a href='?". $_SERVER["QUERY_STRING"] . "'><b>${key}</b></a></h2>\n";
 
-            echo indent(3) . "<ul class = 'build_folder'>\n";
+            echo indent(3) . "<table class = 'build_folder'>\n";
+
+            echo indent(4) . "<tr class = 'header_tr'>\n";
+
+            echo indent(5) . "<th>Distribution</th>\n";
+
+            echo indent(5) . "<th>Version</th>\n";
+
+            echo indent(5) . "<th>Number</th>\n";
+
+            echo indent(5) . "<th>Device</th>\n";
+
+            echo indent(5) . "<th>Date</th>\n";
+
+            echo indent(4) . "</tr>\n";
 
             foreach($releases as $release)
             {
-                echo indent(4) . "<li class = 'build_li'>\n";
 
                 $tag = $release->tag;
-                echo indent(5) . "<a class = 'release_url' href='?view=" . $_GET["view"] . "&amp;tag=$tag'>\n";
                 
-                echo indent(6) . "<span class='build_dist'>" . $release->getLongDist() . "</span>\n";
+                $a_r_url = "<a class = 'release_url' href='?view=" . $_GET["view"] . "&amp;tag=$tag'>";
 
-                echo indent(6) . "<span class='build_version'>" . $release->getVersion() . "</span>\n";
+                echo indent(4) . "<tr class = 'build_tr'>\n";
 
-                echo indent(6) . "<span class='build_number'>" . $release->getBuildNum() . "</span>\n";
+                echo indent(5) . "<td class='build_dist'>" . $a_r_url . $release->getLongDist() . "</a>" . "</td>\n";
 
-                echo indent(6) . "<span class='build_device'>" . $release->getDevice() . "</span>\n";
+                echo indent(5) . "<td class='build_version'>" . $a_r_url . $release->getVersion() . "</a>" . "</td>\n";
 
-                echo indent(6) . "<span class='build_date'>" . $release->getDate() . "</span>\n";
+                echo indent(5) . "<td class='build_number'>" . $a_r_url . $release->getBuildNum() . "</a>" . "</td>\n";
 
-                echo indent(5) . "</a>\n";
+                echo indent(5) . "<td class='build_device'>" . $a_r_url . $release->getDevice() . "</a>" . "</td>\n";
 
-                echo indent(4) . "</li>\n";
+                echo indent(5) . "<td class='build_date'>" . $a_r_url . $release->getDate() . "</a>" . "</td>\n";
+
+                echo indent(4) . "</tr>\n";
             }
-            echo indent(3) . "</ul>\n";
+            echo indent(3) . "</table>\n";
         }
         echo indent(2) . "</div>\n";
     }
