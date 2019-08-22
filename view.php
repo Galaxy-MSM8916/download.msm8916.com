@@ -112,6 +112,8 @@
             if ($group != "date")
                 echo indent(5) . "<th>Date</th>\n";
 
+            echo indent(5) . "<th></th>\n";
+
             echo indent(4) . "</tr>\n";
 
             foreach($releases as $release)
@@ -136,6 +138,8 @@
 
                 if ($group != "date")
                     echo indent(5) . "<td class='build_date'>" . $a_r_url . $release->getDate() . "</a>" . "</td>\n";
+
+                echo indent(5) . "<td class='build_dl_link'>" . $a_r_url . "View" . "</a>" . "</td>\n";
 
                 echo indent(4) . "</tr>\n";
             }
