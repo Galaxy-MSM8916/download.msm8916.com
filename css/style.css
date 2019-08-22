@@ -22,6 +22,26 @@ tag {} - for tag styling
     --body-padding: 0.5%;
 }
 
+body {
+    background-color: var(--bg-color);
+    padding-left: var(--body-padding);
+    padding-right: var(--body-padding);
+    color: var(--text-color);
+}
+
+#body_div {
+    height: 80%;
+    max-height: 80%;
+}
+
+h1 {
+    /* padding-left: 5%; */
+}
+
+.heading {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 #navbar_1, #navbar_2 {
     /* background-color: antiquewhite; */
     text-transform: uppercase;
@@ -76,24 +96,4 @@ span[class ^= 'build'] {
     text-emphasis: none;
     color: grey;
     /* padding-left: 5%; */
-}
-
-#body_div {
-    height: 80%;
-    max-height: 80%;
-}
-
-h1 {
-    /* padding-left: 5%; */
-}
-
-body {
-    background-color: var(--bg-color);
-    padding-left: var(--body-padding);
-    padding-right: var(--body-padding);
-    color: var(--text-color);
-}
-
-.heading {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
