@@ -28,8 +28,23 @@ function get_link($url, $text, $id=null)
 
 function set_title()
 {
-    var $title = document.getElementsByTagName("title")[0].innerHTML;
-    document.getElementsByTagName("h1")[0].innerHTML = $title;
+    $url = document.URL.split("/");
+
+    $domain = $url[2];
+
+    $view = get_param("view");
+
+    $nav_link = document.getElementById("nav_" + $view).innerHTML;
+
+    $text = document.getElementById("nav_" + $view).innerText
+
+    if ($view == null)
+        $title = $domain;
+    else
+        $title = $domain + " > " + $text;
+
+    document.getElementsByTagName("title")[0].innerHTML = $title.toLowerCase();
+    document.getElementById("banner1").innerHTML = get_link($url[1] + "//" + $domain, $domain) + " > " + $nav_link;
 }
 
 set_title()
