@@ -59,7 +59,7 @@ EOF;
 ?>
 
     <div id="body_div" class = "div">
-        <!-- <script src='js/header.js' type='text/javascript'></script> -->
+        <script src='js/main.js' type='text/javascript'></script>
         <?php
             //TODO: model-view controller
 
