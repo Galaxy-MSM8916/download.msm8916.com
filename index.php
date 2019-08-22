@@ -15,15 +15,17 @@
 </head>
 
 <body>
-    <div id="header_div" class = "div">
-        <h1 id = "banner1" title = "title1" class = "heading"></h1>
+    <header>
+        <div id="header_div" class = "div">
+            <h1 id = "banner1" title = "title1" class = "heading"></h1>
 
-        <!-- create the navbar-->
-        <ul id="navbar_1" class="unorderedList">
-            <li> <a href="index.php?view=build_status"> Build Status </a> </li>
-            <li> <a href="index.php?view=downloads"> Downloads </a> </li>
-        </ul>
-    </div>
+            <!-- create the navbar-->
+            <ul id="navbar_1" class="unorderedList">
+                <li> <a href="index.php?view=build_status"> Build Status </a> </li>
+                <li> <a href="index.php?view=downloads"> Downloads </a> </li>
+            </ul>
+        </div>
+    </header>
     <hr id="header_hr">
 
     <div id="body_div" class = "div">
@@ -44,16 +46,18 @@
     </div>
     <hr id="body_hr">
 
-    <div id="footer_div" class="div">
-        <?php
-        ?>
-        <ul id="navbar_2" class="unorderedList">
-            <li> <a href="index.php?view=about"> About </a> </li>
-            <li> <a href="index.php?view=contact"> Contact </a> </li>
-        </ul>
-        <!-- <p id="para_copy"> &copy; Vincent <?php echo date("Y"); ?> </p> -->
-        <p id="para_time"> <i> This page was generated on <?php echo date("d") . "<sup>" . date("S") . "</sup>" . date(" M Y H:i:s T"); ?> </i></p>
-    </div>
+    <footer>
+        <div id="footer_div" class="div">
+            <?php
+            ?>
+            <ul id="navbar_2" class="unorderedList">
+                <li> <a href="index.php?view=about"> About </a> </li>
+                <li> <a href="index.php?view=contact"> Contact </a> </li>
+            </ul>
+            <!-- <p id="para_copy"> &copy; Vincent <?php echo date("Y"); ?> </p> -->
+            <p id="para_time"> <i> This page was generated on <?php echo date("d") . "<sup>" . date("S") . "</sup>" . date(" M Y H:i:s T"); ?> </i></p>
+        </div>
+    </footer>
 
 </body>
 
