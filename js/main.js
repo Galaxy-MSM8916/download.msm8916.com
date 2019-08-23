@@ -30,11 +30,11 @@ function change_nav_class()
 {
     $value = get_param("view");
 
-    if ($value != null)
-    {
-        $elem = document.getElementById("nav_" + $value);
-        $elem.className = "active";
-    }
+    if ($value == null)
+        $value = "home";
+
+    $elem = document.getElementById("nav_" + $value);
+    $elem.className = "active";
 }
 
 function set_title()

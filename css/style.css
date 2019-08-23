@@ -82,6 +82,7 @@ header {
 #top_nav h1 {
     float: left;
     padding-left: 10px;
+    color: #f2f2f2;
 }
 
 #top_nav a {
