@@ -41,21 +41,30 @@ function set_title()
 {
     $url = document.URL.split("/");
 
+    $url2 = document.URL.split("?");
+
     $domain = $url[2];
+    $base_url = $url2[0];
 
     $view = get_param("view");
 
-    $nav_link = document.getElementById("nav_" + $view).innerHTML;
-
-    $text = document.getElementById("nav_" + $view).innerText
+    /*
+    document.getElementById("banner1").innerHTML = get_link($base_url, $domain);
+    */
+    document.getElementById("hostname").innerHTML = get_link($base_url, $domain);
 
     if ($view == null)
         $title = $domain;
     else
+    {
+        $text = document.getElementById("nav_" + $view).innerText
         $title = $domain + " > " + $text;
-
+        /*
+        $nav_link = document.getElementById("nav_" + $view).innerHTML;
+        document.getElementById("banner1").innerHTML = get_link($base_url, $domain) + " > " + $nav_link;
+        */
+    }
     document.getElementsByTagName("title")[0].innerHTML = $title.toLowerCase();
-    document.getElementById("banner1").innerHTML = get_link($url[1] + "//" + $domain, $domain) + " > " + $nav_link;
 }
 
 change_nav_class();
