@@ -27,6 +27,8 @@ tag {} - for tag styling
     --tr-text-hover-color: rgba(255, 255, 255, 0.794);
     --tr-even-bg-color: #f2f2f2c9;
 
+    --nav-bg-color: rgba(51, 51, 51, 0.9);
+
     --body-padding: 0.5%;
 }
 
@@ -68,17 +70,44 @@ h1 {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-#navbar_1, #navbar_2 {
-    /* background-color: antiquewhite; */
-    list-style-type: none;
-    display: flex;
-    /* padding-left: 5%; */
-    /* display: inline;  */
+/* top navigation */
+header {
+    width: 100%;
+    padding: 0px;
+    overflow: hidden;
+    background-color: var(--nav-bg-color);
 }
 
-#navbar_1 a, #navbar_2 a {
+#top_nav {
+    /*background-color: var(--nav-bg-color);*/
+    overflow: hidden;
+}
+
+#top_nav h1 {
+    float: left;
+    padding-left: 10px;
+}
+
+#top_nav a {
+    text-align: center;
+    color: #f2f2f2;
     text-decoration: none;
-    text-transform: uppercase;
+    font-size: 17px;
+}
+
+#top_nav a[id ^= "nav_"] {
+    float: right;
+    padding: 14px 16px;
+}
+
+#top_nav a[id ^="nav_"]:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+#top_nav a[id ^="nav_"].active {
+    background-color: var(--link-active-color);
+    color: white;
 }
 
 /*.release_url:visited,.release_url:unvisited {*/
@@ -145,9 +174,3 @@ tr.build_tr:hover, tr.build_tr a:hover {
     background-color: var(--tr-bg-hover-color);
     color: var(--tr-text-hover-color);
 }
-
-/*
-#navbar_2 {
-    padding-top: 10%
-}
-*/
