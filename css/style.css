@@ -126,10 +126,6 @@ a[class = 'release_url']:hover {
 
 /* release table styling */
 
-div#build_div {
-    overflow-x: auto;
-}
-
 div#build_div h2 a {
     text-decoration: none;
 }
