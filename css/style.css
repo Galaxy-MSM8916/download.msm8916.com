@@ -169,3 +169,24 @@ tr.build_tr:hover, tr.build_tr a:hover {
     background-color: var(--tr-bg-hover-color);
     color: var(--tr-text-hover-color);
 }
+
+/* release info */
+div#release {
+    text-align: left;
+    padding-left: 1%;
+}
+
+div#release_info {
+    padding-left: 1%;
+}
+
+div#release_info p span {
+    /*font-style: oblique;*/
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 110%;
+}
+
+div#release_links {
+    padding-left: 1%;
+}

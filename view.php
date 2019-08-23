@@ -160,7 +160,52 @@
         $tags = \download\releases\read_tags();
         $maps = \download\releases\parse_tags($tags);
 
-        echo "Do something with the tag " . $tag . " here..." . PHP_EOL;
+        $release = $maps["tag"][$tag][0];
+
+        $distLong = $release->getLongDist();
+        $version = $release->getVersion();
+        $device = $release->getDevice();
+        $date = $release->getDate();
+        $build = $release->getBuildNum();
+        $deviceLong = $release->getLongDeviceName();
+        $model = $release->getDeviceModel();
+
+        $github_org_url = "https://github.com/Galaxy-MSM8916";
+
+        $device_tree_url = "${github_org_url}/android_device_samsung_${device}";
+        $kernel_tree_url = "${github_org_url}/android_kernel_samsung_msm8916";
+
+        echo <<<EOF
+        <hr />
+        <div id="release">
+            <h2> ${distLong} ${version} for the ${deviceLong}</h2>
+            <hr />
+            <h3>Info: </h3>
+            <div id="release_info">
+                <p>Device Codename:<span> ${device}</span></p>
+                <p>Device Model:<span> ${model}</span></p>
+                <p>Build Tag:<span> $tag</span></p>
+                <p>Build Date:<span> $date</span></p>
+                <p>Build Number:<span> $build</span></p>
+            </div>
+            <hr />
+            <h3>Links: </h3>
+            <div id="release_links">
+                <p><a href='${device_tree_url}'>Device tree</a></p>
+                <p><a href='${kernel_tree_url}'>Kernel tree</a></p>
+                <p><a href='${github_org_url}/releases/releases/tag/$tag'>View all artifacts/downloads on GitHub</a></p>
+            </div>
+        </div>
+EOF;
+
+        /* TODO: Query github releases and put artifacts into table
+        echo "<hr />\n";
+        echo "<h2>Build Artifacts</h2>\n";
+        echo "<p> ROM: </p>\n";
+        echo "<p> Changelog: </p>\n";
+        echo "<p> Recovery: </p>\n";
+        echo "<p> Boot image: </p>\n";
+        */
 
     }
 
