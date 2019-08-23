@@ -18,12 +18,18 @@
     <header>
         <div id="top_nav" class="top_nav">
             <!-- create the navbar-->
-                <h1 id = "banner1" title = "title1" class = "heading"><?php echo $_SERVER["HTTP_HOST"] ?></h1>
+                <h1 id = "hostname"><?php echo $_SERVER["HTTP_HOST"] ?></h1>
                 <a id="nav_downloads" href="index.php?view=downloads">Downloads</a>
                 <a id="nav_build_status" href="index.php?view=build_status">Build Status</a>
                 <a id="nav_about" href="index.php?view=about">About</a>
                 <a id="nav_contact" href="index.php?view=contact">Contact</a>
         </div>
+        <!--
+        <hr />
+        <div id="table_header">
+                <h1 id = "banner1" title = "title1" class = "heading"><?php echo $_SERVER["HTTP_HOST"] ?></h1>
+        </div>
+        -->
     </header>
     <hr id="header_hr">
 
