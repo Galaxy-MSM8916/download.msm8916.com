@@ -16,26 +16,14 @@
 
 <body>
     <header>
-        <table id="table_header">
-            <tr>
-                <td id="td_banner">
-                    <h1 id = "banner1" title = "title1" class = "heading"><?php echo $_SERVER["HTTP_HOST"] ?></h1>
-                </td>
-
-                <td id="td_navbar">
-                    <!-- create the navbar-->
-                    <ul id="navbar_1" class="unorderedList">
-                        <li id="nav_build_status"><a href="index.php?view=build_status">Build Status</a></li>
-                        <li id="nav_separator"> | </li>
-                        <li id="nav_downloads" class = "current_tab"> <a href="index.php?view=downloads">Downloads</a></li>
-                        <li id="nav_separator"> | </li>
-                        <li id="nav_about"><a href="index.php?view=about">About</a></li>
-                        <li id="nav_separator"> | </li>
-                        <li id="nav_contact"><a href="index.php?view=contact">Contact</a></li>
-                    </ul>
-                </td>
-            </tr>
-        </table>
+        <div id="top_nav" class="top_nav">
+            <!-- create the navbar-->
+                <h1 id = "banner1" title = "title1" class = "heading"><?php echo $_SERVER["HTTP_HOST"] ?></h1>
+                <a id="nav_downloads" href="index.php?view=downloads">Downloads</a>
+                <a id="nav_build_status" href="index.php?view=build_status">Build Status</a>
+                <a id="nav_about" href="index.php?view=about">About</a>
+                <a id="nav_contact" href="index.php?view=contact">Contact</a>
+        </div>
     </header>
     <hr id="header_hr">
 
