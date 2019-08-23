@@ -216,7 +216,8 @@
             "date" => array(),
             "dist" => array(),
             "version" => array(),
-            "device" => array()
+            "device" => array(),
+            "tag" => array()
         );
 
         for ($i = 0; $i < count($tags); $i++)
@@ -228,6 +229,7 @@
             \download\helpers\add_value_to_2d_arr($ret["dist"], $rel->getLongDist(), $rel);
             \download\helpers\add_value_to_2d_arr($ret["version"], $rel->getVersion(), $rel);
             \download\helpers\add_value_to_2d_arr($ret["device"], $rel->getDevice(), $rel);
+            \download\helpers\add_value_to_2d_arr($ret["tag"], $tag, $rel);
         }
         return $ret;
     }
