@@ -20,9 +20,11 @@
             <!-- create the navbar-->
                 <h1 id = "hostname"><?php echo $_SERVER["HTTP_HOST"] ?></h1>
                 <a id="nav_downloads" href="index.php?view=downloads">Downloads</a>
+                <!--
                 <a id="nav_build_status" href="index.php?view=build_status">Build Status</a>
                 <a id="nav_about" href="index.php?view=about">About</a>
                 <a id="nav_contact" href="index.php?view=contact">Contact</a>
+                -->
         </div>
         <!--
         <hr />
