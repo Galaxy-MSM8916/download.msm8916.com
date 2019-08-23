@@ -47,11 +47,6 @@ footer #para_time {
     /* padding-left: 5%; */
 }
 
-#body_div {
-    height: 80%;
-    max-height: 80%;
-}
-
 hr {
     background-color: #ddd;
     color: #ccc;
