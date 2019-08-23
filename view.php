@@ -241,6 +241,23 @@ EOF;
         //echo "<hr />\n";
     }
 
+    function print_home()
+    {
+        echo <<<EOF
+        <div id="home">
+            <h1>Under construction</h1>
+            <hr />
+            <h2>Links:</h2>
+            <div id="home_links">
+                <a href="?view=downloads">View build downloads</a>
+                <a href="https://jenkins.msm8916.com">Jenkins CI</a>
+                <a href="https://review.msm8916.com">Gerrit Code Review</a>
+                <a href="https://github.com/Galaxy-MSM8916">GitHub Page</a>
+            </div>
+        </div>
+EOF;
+    }
+
     function generate_view()
     {
         print_header();
@@ -271,6 +288,7 @@ EOF;
             default:
             {
                 //TODO: default (home) case
+                print_home();
                 break;
             }
         }
