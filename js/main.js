@@ -26,6 +26,17 @@ function get_link($url, $text, $id=null)
     return $link;
 }
 
+function change_nav_class()
+{
+    $value = get_param("view");
+
+    if ($value != null)
+    {
+        $elem = document.getElementById("nav_" + $value);
+        $elem.className = "active";
+    }
+}
+
 function set_title()
 {
     $url = document.URL.split("/");
@@ -47,4 +58,5 @@ function set_title()
     document.getElementById("banner1").innerHTML = get_link($url[1] + "//" + $domain, $domain) + " > " + $nav_link;
 }
 
+change_nav_class();
 set_title()
