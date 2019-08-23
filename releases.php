@@ -124,6 +124,43 @@
             return $this->format->dist_name;
         }
 
+        function getLongDeviceName() {
+            $deviceLong = "Samsung Galaxy ";
+
+            $device = $this->getDevice();
+
+            if (0 == strncmp("j5", $device, 2))
+                $deviceLong .= "J5";
+            elseif (0 == strncmp("gprime", $device, 6))
+                $deviceLong .= "GRAND Prime";
+            elseif (0 == strncmp("fortuna", $device, 7))
+                $deviceLong .= "GRAND Prime";
+            elseif (0 == strncmp("gte", $device, 3))
+                $deviceLong .= "Tab E";
+            elseif (0 == strncmp("gt5", $device, 3))
+                $deviceLong .= "Tab A";
+            elseif (0 == strncmp("a3", $device, 2))
+                $deviceLong .= "A3";
+            elseif (0 == strncmp("a5", $device, 2))
+                $deviceLong .= "A5";
+            elseif (0 == strncmp("j7", $device, 2))
+                $deviceLong .= "J7";
+            elseif (0 == strncmp("o7", $device, 2))
+                $deviceLong .= "On7";
+            elseif (0 == strncmp("serrano", $device, 7))
+                $deviceLong .= "S4 Mini VE";
+            else
+                $deviceLong .= "device";
+
+            return $deviceLong;
+        }
+
+        function getDeviceModel()
+        {
+            //TODO: Implement this function
+            return "N/A";
+        }
+
         function getShortDist()
         {
             return $this->getTokens()[$this->format->dist_offset];
