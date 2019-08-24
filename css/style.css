@@ -164,6 +164,7 @@ tr.build_tr:nth-child(even) {
 tr.build_tr:hover, tr.build_tr a:hover {
     background-color: var(--tr-bg-hover-color);
     color: var(--tr-text-hover-color);
+    transition: var(--link-transition-time);
 }
 
 /* release info */
