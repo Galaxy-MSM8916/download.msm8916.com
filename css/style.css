@@ -46,7 +46,7 @@ footer #para_time {
     text-transform: uppercase;
     font-size: 80%;
     text-emphasis: none;
-    color: grey;
+    color: --var(--nav-bg-color);
     /* padding-left: 5%; */
 }
 
