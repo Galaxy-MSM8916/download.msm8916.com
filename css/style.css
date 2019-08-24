@@ -167,13 +167,9 @@ tr.build_tr:hover, tr.build_tr a:hover {
     transition: var(--link-transition-time);
 }
 
-/* release info */
-div#release {
+/* home, release info */
+div#home, div#release, div#release_info, div#home_links, div#release_links {
     text-align: left;
-    padding-left: 1%;
-}
-
-div#release_info {
     padding-left: 1%;
 }
 
@@ -184,21 +180,7 @@ div#release_info p span {
     font-size: 110%;
 }
 
-div#release_links {
-    padding-left: 1%;
-}
-
-/* home */
-div#home {
-    padding-left: 1%;
-}
-
-div#home_links {
-    padding-left: 1%;
-}
-
-div#home_links a {
-    text-align: left;
+div#home_links a, div#release_links a {
     text-decoration: none;
     display: block;
     padding-left: 5px;
@@ -208,7 +190,7 @@ div#home_links a {
     transition: var(--link-transition-time);
 }
 
-div#home_links a:hover {
+div#home_links a:hover, div#release_links a:hover {
     background-color: var(--home-link-hover-color);
     color: var(--tr-text-hover-color);
     transition: var(--link-transition-time);
