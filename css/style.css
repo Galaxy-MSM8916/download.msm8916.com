@@ -56,12 +56,6 @@ hr {
     width: 100%;
 }
 
-h1 {
-    /* padding-left: 5%; */
-    font-size: 18px;
-    text-transform: uppercase;
-}
-
 .heading {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -81,8 +75,10 @@ header {
 
 #top_nav h1 {
     float: left;
+    font-size: 18px;
     padding-left: 10px;
     color: #f2f2f2;
+    text-transform: lowercase;
 }
 
 #top_nav a {
