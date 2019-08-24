@@ -31,6 +31,13 @@ tag {} - for tag styling
     --home-link-hover-color: rgb(156, 156, 156);
 
     --nav-bg-color: rgba(51, 51, 51, 0.9);
+    --nav-link-color: #f2f2f2;
+    --nav-link-active-color: white;
+    --nav-link-hover-color: black;
+
+    --build-info-link-color: rgb(70, 90, 202);
+
+    --hr-bg-color: #ddd;
 
     --body-padding: 0.5%;
 }
@@ -51,7 +58,7 @@ footer #para_time {
 }
 
 hr {
-    background-color: #ddd;
+    background-color: var(--hr-bg-color);
     color: #ccc;
     height: 1px;
     border: 0px;
@@ -79,13 +86,13 @@ header {
     float: left;
     font-size: 18px;
     padding-left: 10px;
-    color: #f2f2f2;
+    color: var(--nav-link-color);
     text-transform: lowercase;
 }
 
 #top_nav a {
     text-align: center;
-    color: #f2f2f2;
+    color: var(--nav-link-color);
     text-decoration: none;
     font-size: 17px;
 }
@@ -96,13 +103,13 @@ header {
 }
 
 #top_nav a[id ^="nav_"]:hover {
-    background-color: #ddd;
-    color: black;
+    background-color: var(--hr-bg-color);
+    color: var(--nav-link-hover-color);
 }
 
 #top_nav a[id ^="nav_"].active {
     background-color: var(--link-active-color);
-    color: white;
+    color: var(--nav-link-active-color);
 }
 
 /*.release_url:visited,.release_url:unvisited {*/
@@ -145,7 +152,7 @@ table.build_folder {
 }
 
 table.build_folder, tr.header_tr th, tr.build_tr td {
-    border: 1px solid #ddd;
+    border: 1px solid var(--hr-bg-color);
     text-align: center;
     /*background-color: var(--table-bg-color);*/
 }
@@ -153,7 +160,7 @@ table.build_folder, tr.header_tr th, tr.build_tr td {
 td.build_dl_link a {
     font-size: 80%;
     text-transform: uppercase;
-    color: rgb(70, 90, 202);
+    color: var(--build-info-link-color);
     font-weight: bold;
 }
 
