@@ -28,6 +28,8 @@ tag {} - for tag styling
     --tr-text-hover-color: rgba(255, 255, 255, 0.794);
     --tr-even-bg-color: #f2f2f2c9;
 
+    --home-link-hover-color: rgb(156, 156, 156);
+
     --nav-bg-color: rgba(51, 51, 51, 0.9);
 
     --body-padding: 0.5%;
@@ -206,6 +208,7 @@ div#home_links a {
 }
 
 div#home_links a:hover {
-    background-color: var(--tr-bg-hover-color);
+    background-color: var(--home-link-hover-color);
+    color: var(--tr-text-hover-color);
     transition: var(--link-transition-time);
 }
