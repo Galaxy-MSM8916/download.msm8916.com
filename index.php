@@ -34,7 +34,7 @@
     </header>
 
 <?php
-if ($_GET["view"] == downloads  && ($_GET["tag"] == null))
+if ($_GET["view"] == "downloads" && ($_GET["tag"] == null))
 echo <<<EOF
     <hr id="header_hr">
     <table id="navbar_22" class="unorderedList">
