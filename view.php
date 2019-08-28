@@ -230,15 +230,31 @@ EOF;
                     $constraint["dist"] = $new;
                     continue;
                 }
-            elseif (array_key_exists($substr, $maps["device"]))
-                {
-                    $constraint["device"] = $substr;
-                    continue;
-                }
             elseif (array_key_exists($substr, $maps["version"]))
                 {
-                    $constraint["version"] = $substr;
-                    continue;
+                    if($constraint["dist"])
+                    {
+                        $constraint["version"] = $substr;
+                        continue;
+                    }
+                    else
+                    {
+                        $constraint = null;
+                        break;
+                    }
+                }
+            elseif (array_key_exists($substr, $maps["device"]))
+                {
+                    if($constraint["version"])
+                    {
+                        $constraint["device"] = $substr;
+                        continue;
+                    }
+                    else
+                    {
+                        $constraint = null;
+                        break;
+                    }
                 }
         }
 
