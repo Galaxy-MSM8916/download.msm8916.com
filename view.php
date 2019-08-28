@@ -157,8 +157,7 @@
     function list_release_artifacts($tag)
     {
         // get and parse tags
-        $tags = \download\releases\read_tags();
-        $maps = \download\releases\parse_tags($tags);
+        $maps = \download\releases\parse_tags();
 
         $release = $maps["tag"][$tag][0];
 
@@ -212,8 +211,7 @@ EOF;
     function parse_old_download_url()
     {
         // get and parse tags
-        $tags = \download\releases\read_tags();
-        $maps = \download\releases\parse_tags($tags);
+        $maps = \download\releases\parse_tags();
 
         $prefix_len = strlen($_SERVER["CONTEXT_PREFIX"]);
 
@@ -264,8 +262,7 @@ EOF;
     function list_releases($constraint = null)
     {
         // get and parse tags
-        $tags = \download\releases\read_tags();
-        $maps = \download\releases\parse_tags($tags);
+        $maps = \download\releases\parse_tags();
 
         if ($constraint == null)
         {

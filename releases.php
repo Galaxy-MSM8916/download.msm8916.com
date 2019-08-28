@@ -3,6 +3,7 @@
     include "helpers.php";
 
     $format_map = array();
+    $release_map = array();
 
     //$DELIM = "\\-"; //this is not getting interpreted proper for some reason?
 
@@ -247,9 +248,14 @@
         return $tags; 
     }
 
-    function parse_tags(&$tags)
+    function parse_tags()
     {
-        $ret = array(
+        if (count($release_map) > 0)
+            return $release_map;
+
+        $tags = read_tags();
+
+        $release_map = array(
             "date" => array(),
             "dist" => array(),
             "version" => array(),
@@ -262,13 +268,13 @@
             $tag = $tags[$i];
             $rel = get_release($tag); 
             
-            \download\helpers\add_value_to_2d_arr($ret["date"], $rel->getDate(), $rel);
-            \download\helpers\add_value_to_2d_arr($ret["dist"], $rel->getLongDist(), $rel);
-            \download\helpers\add_value_to_2d_arr($ret["version"], $rel->getVersion(), $rel);
-            \download\helpers\add_value_to_2d_arr($ret["device"], $rel->getDevice(), $rel);
-            \download\helpers\add_value_to_2d_arr($ret["tag"], $tag, $rel);
+            \download\helpers\add_value_to_2d_arr($release_map["date"], $rel->getDate(), $rel);
+            \download\helpers\add_value_to_2d_arr($release_map["dist"], $rel->getLongDist(), $rel);
+            \download\helpers\add_value_to_2d_arr($release_map["version"], $rel->getVersion(), $rel);
+            \download\helpers\add_value_to_2d_arr($release_map["device"], $rel->getDevice(), $rel);
+            \download\helpers\add_value_to_2d_arr($release_map["tag"], $tag, $rel);
         }
-        return $ret;
+        return $release_map;
     }
 
     function get_release(&$tag)
