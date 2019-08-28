@@ -16,8 +16,7 @@
     <header>
         <div id="top_nav" class="top_nav">
             <!-- create the navbar-->
-                <?php $default_url =  $_SERVER["REQUEST_SCHEME"] . "://" . $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"]; ?> 
-                <h1 id = "hostname"><a href="<?php echo $default_url ?>"><?php echo $_SERVER["HTTP_HOST"] ?></a></h1>
+                <h1 id = "hostname"><a href="<?php echo view\get_script_base_url() ?>"><?php echo $_SERVER["HTTP_HOST"] ?></a></h1>
                 <a id="nav_downloads" href="?view=downloads">Downloads</a>
                 <a id="nav_home" href="?view=home">Home</a>
                 <!--
@@ -55,7 +54,7 @@ EOF;
 
     <div id="body_div" class = "div">
         <hr id="body_hr">
-        <script src='/js/main.js' type='text/javascript'></script>
+        <script src='<?php echo view\get_script_base_url() . "/js/main.js"?>' type='text/javascript'></script>
         <?php
             view\generate_view();
         ?>

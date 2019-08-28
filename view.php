@@ -2,9 +2,14 @@
 
     include "releases.php";
 
+    function get_script_base_url()
+    {
+        return $_SERVER["REQUEST_SCHEME"] . "://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER["SCRIPT_NAME"]);
+    }
+
     function get_stylesheet()
     {
-        $style = "/css/style.css";
+        $style = get_script_base_url() . "/css/style.css";
         return $style;
     }
 
