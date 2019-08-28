@@ -16,7 +16,8 @@
     <header>
         <div id="top_nav" class="top_nav">
             <!-- create the navbar-->
-                <h1 id = "hostname"><?php echo $_SERVER["HTTP_HOST"] ?></h1>
+                <?php $default_url =  $_SERVER["REQUEST_SCHEME"] . "://" . $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"]; ?> 
+                <h1 id = "hostname"><a href="<?php echo $default_url ?>"><?php echo $_SERVER["HTTP_HOST"] ?></a></h1>
                 <a id="nav_downloads" href="?view=downloads">Downloads</a>
                 <a id="nav_home" href="?view=home">Home</a>
                 <!--

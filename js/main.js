@@ -41,17 +41,16 @@ function set_title()
 {
     $url = document.URL.split("/");
 
-    $url2 = document.URL.split("?");
+    //$url2 = document.URL.split("?");
 
     $domain = $url[2];
-    $base_url = $url2[0];
+    //$base_url = $url2[0];
 
     $view = get_param("view");
 
     /*
     document.getElementById("banner1").innerHTML = get_link($base_url, $domain);
     */
-    document.getElementById("hostname").innerHTML = get_link($base_url, $domain);
 
     if ($view == null)
         $title = $domain;
