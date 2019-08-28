@@ -314,6 +314,11 @@ EOF;
                 //TODO: do something
                 break;
             }
+            case "home":
+            {
+                print_home();
+                break;
+            }
             default:
             {
                 if (strlen($_SERVER["REDIRECT_URL"]) > 0)
