@@ -1,5 +1,4 @@
 <?php namespace download ?>
-<?php error_reporting(E_ALL); ?>
 <?php include "view.php"; ?>
 
 <!DOCTYPE html>
