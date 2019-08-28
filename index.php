@@ -18,12 +18,12 @@
         <div id="top_nav" class="top_nav">
             <!-- create the navbar-->
                 <h1 id = "hostname"><?php echo $_SERVER["HTTP_HOST"] ?></h1>
-                <a id="nav_downloads" href="index.php?view=downloads">Downloads</a>
-                <a id="nav_home" href="index.php?view=home">Home</a>
+                <a id="nav_downloads" href="?view=downloads">Downloads</a>
+                <a id="nav_home" href="?view=home">Home</a>
                 <!--
-                <a id="nav_build_status" href="index.php?view=build_status">Build Status</a>
-                <a id="nav_about" href="index.php?view=about">About</a>
-                <a id="nav_contact" href="index.php?view=contact">Contact</a>
+                <a id="nav_build_status" href="?view=build_status">Build Status</a>
+                <a id="nav_about" href="?view=about">About</a>
+                <a id="nav_contact" href="?view=contact">Contact</a>
                 -->
         </div>
         <!--
@@ -41,13 +41,13 @@ echo <<<EOF
     <table id="navbar_22" class="unorderedList">
         <tr>
             <td> <span>Group by:</span> </td>
-            <td id="nav_groupByDate"> <a href="index.php?view=downloads&groupBy=date">Date</a></td>
+            <td id="nav_groupByDate"> <a href="?view=downloads&groupBy=date">Date</a></td>
             <td id="nav_separator"> | </td>
-            <td id="nav_groupByDevice"> <a href="index.php?view=downloads&groupBy=device">Device</a></td>
+            <td id="nav_groupByDevice"> <a href="?view=downloads&groupBy=device">Device</a></td>
             <td id="nav_separator"> | </td>
-            <td id="nav_groupByDistribution"> <a href="index.php?view=downloads&groupBy=dist">Distribution</a></td>
+            <td id="nav_groupByDistribution"> <a href="?view=downloads&groupBy=dist">Distribution</a></td>
             <td id="nav_separator"> | </td>
-            <td id="nav_groupByVersion"> <a href="index.php?view=downloads&groupBy=version">Version</a></td>
+            <td id="nav_groupByVersion"> <a href="?view=downloads&groupBy=version">Version</a></td>
         </tr>
     </table>
 EOF;
