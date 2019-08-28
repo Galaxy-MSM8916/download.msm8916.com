@@ -144,7 +144,7 @@
                 if ($group != "date")
                     echo indent(5) . "<td class='build_date'>" . get_release_query_link("date", $release->getDate()) . "</td>\n";
 
-                $tag_link = "<a class = 'release_url' href='?view=" . $_GET["view"] . "&amp;tag=$tag'>View</a>";
+                $tag_link = "<a class = 'release_url' href='?view=downloads&amp;tag=$tag'>View</a>";
                 echo indent(5) . "<td class='build_dl_link'>" . $tag_link . "</td>\n";
 
                 echo indent(4) . "</tr>\n";
@@ -209,12 +209,17 @@ EOF;
 
     }
 
-    function list_releases()
+    function parse_old_download_url()
     {
-        
         // get and parse tags
         $tags = \download\releases\read_tags();
         $maps = \download\releases\parse_tags($tags);
+
+        $prefix_len = strlen($_SERVER["CONTEXT_PREFIX"]);
+
+        $old_url = substr($_SERVER["REDIRECT_URL"], $prefix_len);
+
+        $split_url = explode("/", $old_url);
 
         $constraint = array(
             "date" => $_GET["date"],
@@ -222,6 +227,44 @@ EOF;
             "dist" => $_GET["dist"],
             "version" => $_GET["version"]
         );
+
+        foreach ($split_url as $substr)
+        {
+            if (array_key_exists($new = str_replace("_", " ", $substr), $maps["dist"]))
+                {
+                    $constraint["dist"] = $new;
+                    continue;
+                }
+            elseif (array_key_exists($substr, $maps["device"]))
+                {
+                    $constraint["device"] = $substr;
+                    continue;
+                }
+            elseif (array_key_exists($substr, $maps["version"]))
+                {
+                    $constraint["version"] = $substr;
+                    continue;
+                }
+        }
+
+        return $constraint;
+    }
+
+    function list_releases($constraint = null)
+    {
+        // get and parse tags
+        $tags = \download\releases\read_tags();
+        $maps = \download\releases\parse_tags($tags);
+
+        if ($constraint == null)
+        {
+            $constraint = array(
+                "date" => $_GET["date"],
+                "device" => $_GET["device"],
+                "dist" => $_GET["dist"],
+                "version" => $_GET["version"]
+            );
+        }
 
         if (null !== ($case = $_GET["groupBy"]))
         {
@@ -287,8 +330,16 @@ EOF;
             }
             default:
             {
-                //TODO: default (home) case
-                print_home();
+                if (strlen($_SERVER["REDIRECT_URL"]) > 0)
+                {
+                    $constraint = parse_old_download_url();
+                    list_releases($constraint);
+                }
+                else //default (home) case
+                {
+                    print_home();
+                }
+
                 break;
             }
         }
