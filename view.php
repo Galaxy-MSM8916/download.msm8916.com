@@ -4,7 +4,7 @@
 
     function get_stylesheet()
     {
-        $style = "css/style.css";
+        $style = "/css/style.css";
         return $style;
     }
 

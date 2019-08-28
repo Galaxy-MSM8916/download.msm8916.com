@@ -55,7 +55,7 @@ EOF;
 
     <div id="body_div" class = "div">
         <hr id="body_hr">
-        <script src='js/main.js' type='text/javascript'></script>
+        <script src='/js/main.js' type='text/javascript'></script>
         <?php
             view\generate_view();
         ?>
