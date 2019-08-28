@@ -141,7 +141,6 @@
         $artifact_url = "${github_org_url}/releases/releases/download/${tag}";
 
         echo <<<EOF
-        <hr />
         <div id="release">
             <h2> ${distLong} ${version} for the ${deviceLong}</h2>
             <hr />
