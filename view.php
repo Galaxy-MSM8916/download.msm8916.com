@@ -14,40 +14,8 @@
         echo "<link rel='stylesheet' href='$style'>";
     }
 
-    function print_header()
-    {
-
-        //echo "<hr />\n";
-    }
-
-    function print_body()
-    {
-
-        //echo "<h1>Title</h1>\n";
-        //echo "<script src='js/headers.js' type='text/javascript'></script>\n";
-        //echo "<hr />\n";
-    }
-
-    function print_footer()
-    {
-
-    } 
-
-    /* 
-        echo $_SERVER['QUERY_STRING'] . PHP_EOL;
-
-        ["QUERY_STRING"]=>
-        string(27) "view=downloads&groupBy=date"
-        ["REQUEST_URI"]=>
-        string(61) "/~vincent/html/download/index.php?view=downloads&groupBy=date"
-        ["SCRIPT_NAME"]=>
-        string(33) "/~vincent/html/download/index.php"
-        ["PHP_SELF"]=>
-        string(33) "/~vincent/html/download/index.php"
-    */
     function get_release_query_link($key, $value, $text = null)
     {
-        //echo "<a href=\"?groupBy=${group}&${group}=${key}\"> <b>${key}</b></a>";
         if ($text == null)
             $text = $value;
 
@@ -84,12 +52,8 @@
         if ($group == null)
             $group = "device";
 
-
         echo indent(2) . "<div id = 'build_div' class = 'div'>\n";
 
-        //TODO: Make selector/navbar for choosing group sort selection
-
-        //foreach($relGroup as $releases)
         foreach(array_keys($relGroup) as $key)
         {
             $releases = \download\releases\filter_releases($relGroup[$key], $constraint);
@@ -299,13 +263,6 @@ EOF;
             $case = "device";
             print_releases($case, $maps[$case], $constraint);
         }
-        
-        //var_dump(filter_releases($maps["device"], $constraint));
-        //echo "</pre>\n";
-
-        /*
-        */
-        //echo "<hr />\n";
     }
 
     function print_home()
@@ -337,10 +294,6 @@ EOF;
 
     function generate_view()
     {
-        print_header();
-        print_body();
-        print_footer();
-
         switch($case = $_GET["view"])
         {
             case "downloads":
