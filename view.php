@@ -174,6 +174,8 @@
         $device_tree_url = "${github_org_url}/android_device_samsung_${device}";
         $kernel_tree_url = "${github_org_url}/android_kernel_samsung_msm8916";
 
+        $artifact_url = "${github_org_url}/releases/releases/download/${tag}";
+
         echo <<<EOF
         <hr />
         <div id="release">
@@ -183,29 +185,43 @@
             <div id="release_info">
                 <p>Device Codename:<span> ${device}</span></p>
                 <p>Device Model:<span> ${model}</span></p>
-                <p>Build Tag:<span> $tag</span></p>
                 <p>Build Date:<span> $date</span></p>
                 <p>Build Number:<span> $build</span></p>
             </div>
             <hr />
-            <h3>Links: </h3>
             <div id="release_links">
+                <h3>Artifacts: </h3>
+                <p>Changelog: <a href='${artifact_url}/changelog-${tag}.txt'>changelog-${tag}.txt</a></p>
+EOF;
+        if (strncmp($distLong, "TWRP", 4) == 0)
+        {
+        echo <<<TWRP
+                <p>ODIN-Flashable Recovery: <a href='${artifact_url}/${tag}.tar/'>${tag}.tar</a></p>
+TWRP;
+        }
+        elseif (strncmp($distLong, "Kernel", 6) == 0)
+        {
+        echo <<<KERNEL
+                <p>ODIN-Flashable Kernel: <a href='${artifact_url}/${tag}.tar/'>${tag}.tar</a></p>
+KERNEL;
+        }
+        else
+        {
+        echo <<<ROM
+                <p>ROM: <a href='${artifact_url}/${tag}.zip'>${tag}.zip</a></p>
+                <p>MD5: <a href='${artifact_url}/${tag}.zip.md5'>${tag}.zip.md5</a></p>
+ROM;
+        }
+        echo <<<EOF
+                <br />
+                <p><a href='${github_org_url}/releases/releases/tag/$tag'>View all artifacts/downloads on GitHub</a></p>
+                <hr />
+                <h3>Other Links: </h3>
                 <p><a href='${device_tree_url}'>Device tree</a></p>
                 <p><a href='${kernel_tree_url}'>Kernel tree</a></p>
-                <p><a href='${github_org_url}/releases/releases/tag/$tag'>View all artifacts/downloads on GitHub</a></p>
             </div>
         </div>
 EOF;
-
-        /* TODO: Query github releases and put artifacts into table
-        echo "<hr />\n";
-        echo "<h2>Build Artifacts</h2>\n";
-        echo "<p> ROM: </p>\n";
-        echo "<p> Changelog: </p>\n";
-        echo "<p> Recovery: </p>\n";
-        echo "<p> Boot image: </p>\n";
-        */
-
     }
 
     function parse_old_download_url()
