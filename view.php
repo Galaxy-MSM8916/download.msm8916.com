@@ -221,12 +221,7 @@ EOF;
 
         $split_url = explode("/", $old_url);
 
-        $constraint = array(
-            "date" => $_GET["date"],
-            "device" => $_GET["device"],
-            "dist" => $_GET["dist"],
-            "version" => $_GET["version"]
-        );
+        $constraint = array();
 
         foreach ($split_url as $substr)
         {
@@ -301,6 +296,16 @@ EOF;
 EOF;
     }
 
+    function print_404()
+    {
+        echo <<<EOF
+        <h2>Error 404 - Not found</h2>
+        <br />
+        <h3>The page requested could not be found.</h2>
+        <br />
+EOF;
+    }
+
     function generate_view()
     {
         print_header();
@@ -333,7 +338,11 @@ EOF;
                 if (strlen($_SERVER["REDIRECT_URL"]) > 0)
                 {
                     $constraint = parse_old_download_url();
-                    list_releases($constraint);
+
+                    if (count($constraint) > 0)
+                        list_releases($constraint);
+                    else
+                        print_404();
                 }
                 else //default (home) case
                 {
