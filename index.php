@@ -63,9 +63,11 @@ EOF;
     <footer>
         <hr id="footer_hr">
         <div id="footer_div" class="div">
+            <?php $time = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"] ?> 
             <?php $dateStr = date("d") . "<sup>" . date("S") . "</sup>" . date(" M Y H:i:s T"); ?> 
             <p id="para_time">
                 <i>This page was generated on <?= $dateStr ?></i>
+                in <i><?= round($time, 5) ?> seconds.</i>
             </p>
         </div>
     </footer>
