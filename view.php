@@ -37,6 +37,8 @@
 
     function indent($num = 1)
     {
+        global $ind;
+
         if ($ind[$num])
             return $ind[$num];
 

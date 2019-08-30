@@ -47,6 +47,8 @@
         #lineage-go-16.0-j8-20181117-NIGHTLY-fortuna3g
         */
 
+        global $format_map;
+
         if (count($format_map) == 0)
         {
             $format_map["TWRP"] = new rel_format("TWRP", 5, 0, 6, 4, 1, true);
@@ -254,6 +256,8 @@
             return $release_map;
 
         $tags = read_tags();
+
+        global $release_map;
 
         $release_map = array(
             "date" => array(),
