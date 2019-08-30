@@ -63,7 +63,10 @@ EOF;
     <footer>
         <hr id="footer_hr">
         <div id="footer_div" class="div">
-            <p id="para_time"> <i> This page was generated on <?php echo date("d") . "<sup>" . date("S") . "</sup>" . date(" M Y H:i:s T"); ?> </i></p>
+            <?php $dateStr = date("d") . "<sup>" . date("S") . "</sup>" . date(" M Y H:i:s T"); ?> 
+            <p id="para_time">
+                <i>This page was generated on <?= $dateStr ?></i>
+            </p>
         </div>
     </footer>
 
