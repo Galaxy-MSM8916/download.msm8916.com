@@ -4,6 +4,7 @@
 
     $format_map = array();
     $release_map = array();
+    $tags = null;
 
     //$DELIM = "\\-"; //this is not getting interpreted proper for some reason?
 
@@ -226,6 +227,11 @@
     {
         //$cwd = getcwd();
         //$relpath = "$cwd/releases.txt";
+        global $tags;
+
+        if ($tags !== null)
+            return $tags;
+
         $relfile = fopen($tagpath, "r");
 
         $tags = array();
