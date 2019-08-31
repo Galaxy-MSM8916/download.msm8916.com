@@ -175,6 +175,8 @@
 
             if (0 == strncmp("j5", $device, 2))
                 $deviceLong .= "J5";
+            elseif (0 == strncmp("coreprime", $device, 9))
+                $deviceLong .= "Core Prime";
             elseif (0 == strncmp("gprime", $device, 6))
                 $deviceLong .= "GRAND Prime";
             elseif (0 == strncmp("fortuna", $device, 7))
