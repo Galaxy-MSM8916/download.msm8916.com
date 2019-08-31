@@ -128,7 +128,7 @@
     function list_release_artifacts($tag)
     {
         // get and parse tags
-        $maps = \download\releases\parse_tags();
+        $maps = \download\releases\parse_github_releases();
 
         $release = $maps["tag"][$tag][0];
 
@@ -197,7 +197,7 @@ EOF;
     function parse_old_download_url()
     {
         // get and parse tags
-        $maps = \download\releases\parse_tags();
+        $maps = \download\releases\parse_github_releases();
 
         $prefix_len = strlen($_SERVER["CONTEXT_PREFIX"]);
 
@@ -248,7 +248,7 @@ EOF;
     function list_releases($constraint = null)
     {
         // get and parse tags
-        $maps = \download\releases\parse_tags();
+        $maps = \download\releases\parse_github_releases();
 
         if ($constraint == null)
         {
