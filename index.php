@@ -37,7 +37,7 @@
 if ($_GET["view"] == "downloads" && ($_GET["tag"] == null))
 echo <<<EOF
     <hr id="header_hr">
-    <table id="navbar_22" class="unorderedList">
+    <table id="nav_group" class="unorderedList">
         <tr>
             <td> <span>Group by:</span> </td>
             <td id="nav_groupByDate"> <a href="?view=downloads&amp;groupBy=date">Date</a></td>
