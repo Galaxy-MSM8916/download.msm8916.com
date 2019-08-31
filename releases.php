@@ -148,6 +148,19 @@
             return $this->artifacts;
         }
 
+        function getDownloads()
+        {
+            $max = 0;
+
+            foreach($this->artifacts as $artifacts)
+            {
+                if (($downloads = $artifacts->getDownloadCount()) > $max)
+                    $max = $downloads;
+            }
+
+            return $max;
+        }
+
         function getTokens()
         {
             if ($this->format->replace_uscore == true)
@@ -299,6 +312,7 @@
             $version = $release->getVersion();
             $device = $release->getDevice();
             $dist = $release->getLongDist();
+            $downloads = $release->getDownloads();
 
             if ($constraint["date"] && $date != $constraint["date"])
                 continue;
@@ -307,6 +321,8 @@
             if ($constraint["device"] && $device != $constraint["device"])
                 continue;
             if ($constraint["dist"] && $dist != $constraint["dist"])
+                continue;
+            if ($constraint["downloads"] && $downloads != $constraint["downloads"])
                 continue;
 
             $ret[] = $release;
@@ -405,6 +421,7 @@
 
         $release_map = array(
             "date" => array(),
+            "downloads" => array(),
             "dist" => array(),
             "version" => array(),
             "device" => array(),
@@ -433,6 +450,7 @@
                 }
 
                 add_value_to_2d_arr($release_map["date"], $rel->getDate(), $rel);
+                add_value_to_2d_arr($release_map["downloads"], $rel->getDownloads(), $rel);
                 add_value_to_2d_arr($release_map["dist"], $rel->getLongDist(), $rel);
                 add_value_to_2d_arr($release_map["version"], $rel->getVersion(), $rel);
                 add_value_to_2d_arr($release_map["device"], $rel->getDevice(), $rel);

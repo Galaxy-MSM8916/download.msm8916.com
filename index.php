@@ -47,6 +47,8 @@ echo <<<EOF
             <td id="nav_groupByDistribution"> <a href="?{$_SERVER["QUERY_STRING"]}&amp;groupBy=dist">Distribution</a></td>
             <td id="nav_separator"> | </td>
             <td id="nav_groupByVersion"> <a href="?{$_SERVER["QUERY_STRING"]}&amp;groupBy=version">Version</a></td>
+            <td id="nav_separator"> | </td>
+            <td id="nav_groupByDownloads"> <a href="?{$_SERVER["QUERY_STRING"]}&amp;groupBy=downloads">Downloads</a></td>
         </tr>
     </table>
 EOF;
