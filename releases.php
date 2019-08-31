@@ -96,6 +96,30 @@
         {
             return $this->download_url;
         }
+
+        function getDescription()
+        {
+            $split = explode(".", $this->name);
+
+            $extension = $split[count($split) - 1];
+
+            if (strncmp($this->name, "changelog", 9) == 0)
+                $description = "Changelog";
+            elseif (strncmp($extension, "tar", 3) == 0)
+                $description = "ODIN-Flashable image";
+            elseif (strncmp($extension, "img", 3) == 0)
+                $description = "Flashable partition image";
+            elseif (strncmp($extension, "zip", 3) == 0)
+                $description = "Recovery Flashable (ROM) image";
+            elseif (strncmp($extension, "md5", 3) == 0)
+                $description = "MD5 Checksum";
+            elseif (strncmp($extension, "prop", 4) == 0)
+                $description = "System Prop";
+            else
+                $description = "N/A";
+
+            return $description;
+        }
     }
 
     class github_release
