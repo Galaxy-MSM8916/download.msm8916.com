@@ -319,14 +319,9 @@
     }
 
     /* fetch json-formatted releases from a url, by default github api */
-    function fetch_releases_from_remote($out_dir = null, $compress = true, $url = null)
+    function fetch_releases_from_remote($request_url, $out_dir, $compress)
     {
         $count = 0;
-
-        if ($url == null)
-            $request_url = "https://api.github.com/repos/Galaxy-MSM8916/releases/releases?page=";
-        else
-            $request_url = $url;
 
         $pages = array();
 
@@ -390,12 +385,8 @@
         return $pages;
     }
 
-    function parse_github_releases($decoded_json = null)
+    function &parse_decoded_releases(&$decoded_json)
     {
-        global $release_map;
-
-        if (count($release_map) > 0)
-            return $release_map;
 
         $release_map = array(
             "date" => array(),
@@ -404,9 +395,6 @@
             "device" => array(),
             "tag" => array()
         );
-
-        if ($decoded_json == null)
-            $decoded_json = fetch_releases_from_remote();
 
         foreach ($decoded_json as $page)
         {
@@ -437,6 +425,33 @@
             }
         }
         return $release_map;
+    }
+
+
+    function parse_github_releases()
+    {
+        global $release_map;
+
+        if (count($release_map) > 0)
+            return $release_map;
+
+        $cache_dir = $GLOBALS['cfg']['releases']['cache_dir'];
+
+        $request_url = $GLOBALS['cfg']['releases']['request_url'];
+
+        if (null == ($compress = $GLOBALS['cfg']['releases']['compress']))
+            $compress = false;
+
+        //TODO: Fetch releases from github when update interval passes
+        if ($cache_dir == null)
+            $decoded_json = fetch_releases_from_remote($request_url, $cache_dir, $compress);
+        else
+            $decoded_json = fetch_releases_from_dir($cache_dir);
+
+        $release_map = parse_decoded_releases($decoded_json);
+
+        return $release_map;
+
     }
 
 ?>
