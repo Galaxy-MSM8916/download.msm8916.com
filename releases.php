@@ -62,50 +62,66 @@
         return $format_map;
     }
 
-
-    class Release
+    class github_release_artifact
     {
+        var $name; //a filename
+        var $size;
+        var $download_count;
+        var $download_url;
+
+        public function __construct($name, $size, $download_count, $download_url)
+        {
+            $this->name = $name;
+            $this->size = $size;
+            $this->download_count = $download_count;
+            $this->download_url = $download_url;
+        }
+
+        function getName()
+        {
+            return $this->name;
+        }
+
+        function getSize()
+        {
+            return $this->size;
+        }
+
+        function getDownloadCount()
+        {
+            return $this->download_count;
+        }
+
+        function getDownloadUrl()
+        {
+            return $this->download_url;
+        }
+    }
+
+    class github_release
+    {
+        var $tag;
+        var $artifacts;
 
         var $format;
-        var $tag;
         var $tokens;
-        /*
-        var $dist;
-        var $dist_version;
-        var $rel_type; //bootimage, otapackage, etc
-        var $date;
-        var $build_num;
-        var $channel; //NIGHTLY, WEEKLY, etc
-        var $device;
-        var $extra;
 
-        function __construct($long_dist, $version, $date, $build_num, $device,
-            $rel_type, $channel, $extra)
-            //$rel_type = "otapackage", $channel = "NIGHTLY", $extra = "")
+        public function __construct(&$tag, &$format)
         {
-            $this->long_dist = $long_dist;
-            $this->dist_version = $version;
-            $this->date = $date;
-            $this->build_num = $build_num;
-            $this->device = $device;
-            $this->channel = $channel;
-            $this->rel_type = $rel_type;
-            $this->extra = $extra;
-        }
-        */
-
-        function __construct(&$tag, &$format)
-        {
-            /*
-            if ($format->replace_uscore == true)
-                //$tag = str_replace("_", $DELIM, $this->tag);
-                $this->tag = str_replace("_", "-", $tag);
-            else
-            */
             $this->tag = $tag;
-
             $this->format = $format;
-            //$this->tokens = null;
+            $this->artifacts = array();
+        }
+
+        function add_artifact($name, $size, $download_count, $download_url)
+        {
+            $relAsset = new github_release_artifact($name, $size, $download_count, $download_url);
+            $this->artifacts[] = $relAsset;
+        }
+
+        function getArtifacts()
+        {
+            return $this->artifacts;
         }
 
         function getTokens()
@@ -301,7 +317,7 @@
             if (strncasecmp($key, $tag, $n) == 0)
             {
                 $format = $map[$key];
-                $release = new Release($tag, $format);
+                $release = new github_release($tag, $format);
                 break;
             }
         }
