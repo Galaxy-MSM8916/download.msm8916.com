@@ -51,6 +51,14 @@ echo <<<EOF
             <td id="nav_groupByDownloads"> <a href="?{$_SERVER["QUERY_STRING"]}&amp;groupBy=downloads">Downloads</a></td>
         </tr>
     </table>
+    <table id="nav_sort" class="unorderedList">
+        <tr>
+            <td> <span>Sort:</span> </td>
+            <td id="nav_sortAsc"> <a href="?{$_SERVER["QUERY_STRING"]}&amp;sort=asc">Ascending order</a></td>
+            <td id="nav_separator"> | </td>
+            <td id="nav_sortDesc"> <a href="?{$_SERVER["QUERY_STRING"]}&amp;sort=desc">Descending order</a></td>
+        </tr>
+    </table>
 EOF;
 ?>
 

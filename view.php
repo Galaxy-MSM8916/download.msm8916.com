@@ -61,7 +61,14 @@
 
         echo indent(2) . "<div id = 'build_div' class = 'div'>\n";
 
-        foreach(array_keys($relGroup) as $key)
+        $keys = array_keys($relGroup);
+
+        if ($_GET["sort"] == "asc")
+            asort($keys);
+        elseif ($_GET["sort"] == "desc")
+            arsort($keys);
+
+        foreach($keys as $key)
         {
             $releases = \download\releases\filter_releases($relGroup[$key], $constraint);
 
