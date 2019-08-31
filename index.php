@@ -40,13 +40,13 @@ echo <<<EOF
     <table id="nav_group" class="unorderedList">
         <tr>
             <td> <span>Group by:</span> </td>
-            <td id="nav_groupByDate"> <a href="?view=downloads&amp;groupBy=date">Date</a></td>
+            <td id="nav_groupByDate"> <a href="?{$_SERVER["QUERY_STRING"]}&amp;groupBy=date">Date</a></td>
             <td id="nav_separator"> | </td>
-            <td id="nav_groupByDevice"> <a href="?view=downloads&amp;groupBy=device">Device</a></td>
+            <td id="nav_groupByDevice"> <a href="?{$_SERVER["QUERY_STRING"]}&amp;groupBy=device">Device</a></td>
             <td id="nav_separator"> | </td>
-            <td id="nav_groupByDistribution"> <a href="?view=downloads&amp;groupBy=dist">Distribution</a></td>
+            <td id="nav_groupByDistribution"> <a href="?{$_SERVER["QUERY_STRING"]}&amp;groupBy=dist">Distribution</a></td>
             <td id="nav_separator"> | </td>
-            <td id="nav_groupByVersion"> <a href="?view=downloads&amp;groupBy=version">Version</a></td>
+            <td id="nav_groupByVersion"> <a href="?{$_SERVER["QUERY_STRING"]}&amp;groupBy=version">Version</a></td>
         </tr>
     </table>
 EOF;
