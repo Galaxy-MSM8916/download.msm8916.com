@@ -4,6 +4,7 @@
     $cfg['releases']["cache_dir"] = "releases_zlib";
     $cfg['releases']["compress"] = true;
 
-    $cfg['releases']["update_interval"] = 3600 //interval in seconds
+    $cfg['releases']["update_interval"] = 3600; //interval in seconds
+
 ?>
 
