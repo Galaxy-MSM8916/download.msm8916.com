@@ -4,7 +4,6 @@
 
     $format_map = array();
     $release_map = array();
-    $tags = null;
 
     //$DELIM = "\\-"; //this is not getting interpreted proper for some reason?
 
