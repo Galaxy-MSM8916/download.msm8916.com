@@ -417,11 +417,11 @@
                     $rel->add_artifact($name, $size, $download_count, $download_url);
                 }
 
-                \download\helpers\add_value_to_2d_arr($release_map["date"], $rel->getDate(), $rel);
-                \download\helpers\add_value_to_2d_arr($release_map["dist"], $rel->getLongDist(), $rel);
-                \download\helpers\add_value_to_2d_arr($release_map["version"], $rel->getVersion(), $rel);
-                \download\helpers\add_value_to_2d_arr($release_map["device"], $rel->getDevice(), $rel);
-                \download\helpers\add_value_to_2d_arr($release_map["tag"], $tag, $rel);
+                add_value_to_2d_arr($release_map["date"], $rel->getDate(), $rel);
+                add_value_to_2d_arr($release_map["dist"], $rel->getLongDist(), $rel);
+                add_value_to_2d_arr($release_map["version"], $rel->getVersion(), $rel);
+                add_value_to_2d_arr($release_map["device"], $rel->getDevice(), $rel);
+                add_value_to_2d_arr($release_map["tag"], $tag, $rel);
             }
         }
         return $release_map;

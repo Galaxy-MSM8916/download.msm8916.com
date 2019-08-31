@@ -1,4 +1,4 @@
-<?php namespace download\helpers;
+<?php
 
 function get_link_elem($url, $text)
 {
