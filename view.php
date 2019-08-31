@@ -144,8 +144,7 @@
 
         $device_tree_url = "${github_org_url}/android_device_samsung_${device}";
         $kernel_tree_url = "${github_org_url}/android_kernel_samsung_msm8916";
-
-        $artifact_url = "${github_org_url}/releases/releases/download/${tag}";
+        $release_url = "${github_org_url}/releases/releases/tag/$tag";
 
         echo <<<EOF
         <div id="release">
@@ -159,36 +158,48 @@
                 <p>Build Number:<span> $build</span></p>
             </div>
             <hr />
+            <h3>Artifacts: </h3>
             <div id="release_links">
-                <h3>Artifacts: </h3>
-                <p>Changelog: <a href='${artifact_url}/changelog-${tag}.txt'>changelog-${tag}.txt</a></p>
 EOF;
-        if (strncmp($distLong, "TWRP", 4) == 0)
+
+        $MiB = 1024 * 1024;
+        $KiB = 1024;
+
+        foreach($release->getArtifacts() as $artifact)
         {
-        echo <<<TWRP
-                <p>ODIN-Flashable Recovery: <a href='${artifact_url}/${tag}.tar/'>${tag}.tar</a></p>
-TWRP;
+            $name = $artifact->getName();
+            $size = $artifact->getSize();
+            $download_count = $artifact->getDownloadCount();
+            $download_url = $artifact->getDownloadUrl();
+            $description = $artifact->getDescription();
+
+            if ($size > $MiB)
+                $sizeTxt = round($size / $MiB, 2) . " MiB";
+            elseif ($size > $KiB)
+                $sizeTxt = round($size / $KiB, 2) . " KiB";
+            else
+                $sizeTxt = $size . " bytes";
+
+            echo <<<ARTIFACT
+                <div class="artifact_info">
+                    <a href='${download_url}' title="Download ${description}">
+                        <p>Name: <span>${name}</span></p>
+                        <p>File Type: <span>${description}</span></p>
+                        <p>File Size: <span>${sizeTxt}</span></p>
+                        <p>Download Count: <span>${download_count}</span></p>
+                    </a>
+                    <hr />
+                </div>
+ARTIFACT;
         }
-        elseif (strncmp($distLong, "Kernel", 6) == 0)
-        {
-        echo <<<KERNEL
-                <p>ODIN-Flashable Kernel: <a href='${artifact_url}/${tag}.tar/'>${tag}.tar</a></p>
-KERNEL;
-        }
-        else
-        {
-        echo <<<ROM
-                <p>ROM: <a href='${artifact_url}/${tag}.zip'>${tag}.zip</a></p>
-                <p>MD5: <a href='${artifact_url}/${tag}.zip.md5'>${tag}.zip.md5</a></p>
-ROM;
-        }
+
         echo <<<EOF
-                <br />
-                <p><a href='${github_org_url}/releases/releases/tag/$tag'>View all artifacts/downloads on GitHub</a></p>
-                <hr />
                 <h3>Other Links: </h3>
-                <p><a href='${device_tree_url}'>Device tree</a></p>
-                <p><a href='${kernel_tree_url}'>Kernel tree</a></p>
+                <div class="other_links">
+                    <p><a href='${device_tree_url}'>Device tree</a></p>
+                    <p><a href='${kernel_tree_url}'>Kernel tree</a></p>
+                    <p><a href='${release_url}'>View all artifacts/downloads on GitHub</a></p>
+                <div>
             </div>
         </div>
 EOF;

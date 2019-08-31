@@ -174,19 +174,19 @@ tr.build_tr:hover, tr.build_tr a:hover {
 }
 
 /* home, release info */
-div#home, div#release, div#release_info, div#home_links, div#release_links {
+div#home, div#release, div#release_info, div#home_links, div#release_links, div.artifact_info, div.other_links {
     text-align: left;
     padding-left: 1%;
 }
 
-div#release_info p span {
+div#release_info p span, div.artifact_info p span {
     /*font-style: oblique;*/
     font-weight: bold;
     font-family: monospace;
     font-size: 110%;
 }
 
-div#home_links a, div#release_links a {
+div#home_links a, div.other_links a {
     text-decoration: none;
     display: block;
     padding-left: 5px;
@@ -196,8 +196,23 @@ div#home_links a, div#release_links a {
     transition: var(--link-transition-time);
 }
 
-div#home_links a:hover, div#release_links a:hover {
+div#home_links a:hover, div.other_links a:hover {
     background-color: var(--home-link-hover-color);
     color: var(--tr-text-hover-color);
+    transition: var(--link-transition-time);
+}
+
+div.artifact_info a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+div.artifact_info span {
+    color: var(--build-info-link-color);
+}
+
+div.artifact_info span:hover {
+    text-decoration-line: underline;
+    color: var(--link-active-color);
     transition: var(--link-transition-time);
 }
