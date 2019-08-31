@@ -1,5 +1,7 @@
 <?php namespace download\helpers;
 
+include "globals.php";
+
 function get_link_elem($url, $text)
 {
     $s = "<a href=\"$url\" >$text</a>\n";
