@@ -363,4 +363,144 @@
         return $ret;
     }
 
+    function getSslPage($url) {
+
+        $userAgent = "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0";
+        $timeout = 2;
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_USERAGENT, $userAgent);
+        curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+        curl_setopt($ch, CURLOPT_REFERER, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        return $result;
+    }
+
+    /* fetch json-formatted releases from a url, by default github api */
+    function fetch_releases_from_remote($out_dir = null, $compress = true, $url = null)
+    {
+        $count = 0;
+
+        if ($url == null)
+            $request_url = "https://api.github.com/repos/Galaxy-MSM8916/releases/releases?page=";
+        else
+            $request_url = $url;
+
+        $pages = array();
+
+        if ($out_dir && (is_dir($out_dir) == false))
+            mkdir($out_dir, 0755, true);
+
+        do
+        {
+            $count = $count + 1;
+            // read file into string
+            $request_data = getSslPage($request_url . $count);
+
+            $handle = false;
+
+            if ($out_dir && is_dir($out_dir))
+            {
+                if ($compress)
+                    $fpath = "compress.zlib://" . $out_dir . "/" . $count . ".gz";
+                else
+                    $fpath = $out_dir . "/" . $count;
+
+                $handle = fopen($fpath, "w");
+            }
+
+            // TODO: possibly log write info to a log file
+            if ($handle !== false)
+            {
+                fwrite($handle, $request_data);
+                fclose($handle);
+            }
+
+            // decode the json string
+            $pages[$count] = json_decode($request_data, true);
+
+        }
+        while (count($pages[$count]) > 0);
+
+        return $pages;
+
+    }
+
+    function fetch_releases_from_dir($path)
+    {
+        $pages = array();
+
+        if (is_dir($path))
+            $dh = opendir($path);
+        else
+            return $pages;
+
+        while ($filename = readdir($dh))
+        {
+            $fpath = $path . "/" . $filename;
+
+            if (is_dir($fpath))
+                continue;
+
+            $request_data = file_get_contents("compress.zlib://" . $fpath);
+            $pages[$filename] = json_decode($request_data, true);
+        }
+        return $pages;
+    }
+
+    function parse_github_releases($decoded_json = null)
+    {
+        global $release_map;
+
+        if (count($release_map) > 0)
+            return $release_map;
+
+        $release_map = array(
+            "date" => array(),
+            "dist" => array(),
+            "version" => array(),
+            "device" => array(),
+            "tag" => array()
+        );
+
+        if ($decoded_json == null)
+            $decoded_json = fetch_releases_from_remote();
+
+        foreach ($decoded_json as $page)
+        {
+            foreach ($page as $raw_release)
+            {
+                $tag = $raw_release["tag_name"];
+
+                // skip unmatched releases
+                //TODO: Add remaining release types (gapps, etc)
+                if(null == ($rel = get_release($tag)))
+                    continue;
+
+                foreach($raw_release["assets"] as $raw_asset)
+                {
+                    $name = $raw_asset["name"];
+                    $size = $raw_asset["size"];
+                    $download_count = $raw_asset["download_count"];
+                    $download_url = $raw_asset["browser_download_url"];
+
+                    $rel->add_artifact($name, $size, $download_count, $download_url);
+                }
+
+                \download\helpers\add_value_to_2d_arr($release_map["date"], $rel->getDate(), $rel);
+                \download\helpers\add_value_to_2d_arr($release_map["dist"], $rel->getLongDist(), $rel);
+                \download\helpers\add_value_to_2d_arr($release_map["version"], $rel->getVersion(), $rel);
+                \download\helpers\add_value_to_2d_arr($release_map["device"], $rel->getDevice(), $rel);
+                \download\helpers\add_value_to_2d_arr($release_map["tag"], $tag, $rel);
+            }
+        }
+        return $release_map;
+    }
+
 ?>
