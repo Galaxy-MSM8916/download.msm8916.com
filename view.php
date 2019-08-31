@@ -148,17 +148,17 @@
 
         echo <<<EOF
         <div id="release">
-            <h2> ${distLong} ${version} for the ${deviceLong}</h2>
+            <h2>${distLong} ${version} for the ${deviceLong}</h2>
             <hr />
-            <h3>Info: </h3>
+            <h3>Info:</h3>
             <div id="release_info">
-                <p>Device Codename:<span> ${device}</span></p>
-                <p>Device Model:<span> ${model}</span></p>
-                <p>Build Date:<span> $date</span></p>
-                <p>Build Number:<span> $build</span></p>
+                <p>Device Codename: <span>${device}</span></p>
+                <p>Device Model: <span>${model}</span></p>
+                <p>Build Date: <span>$date</span></p>
+                <p>Build Number: <span>$build</span></p>
             </div>
             <hr />
-            <h3>Artifacts: </h3>
+            <h3>Artifacts:</h3>
             <div id="release_links">
 EOF;
 
