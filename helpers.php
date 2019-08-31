@@ -19,4 +19,15 @@ function add_value_to_2d_arr(&$arr, $key, &$value)
     $arr[$key][] = $value;
 }
 
+/* Return true iff all array values are equal to $testValue */
+function test_array_values($array, $testValue = null)
+{
+    foreach($array as $value)
+    {
+        if ($value !== $testValue)
+            return false;
+    }
+    return true;
+}
+
 ?>

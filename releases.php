@@ -260,17 +260,6 @@
         return $release;
     }
 
-    /* Return true iff all array values are equal to $testValue */
-    function test_array_values($array, $testValue = null)
-    {
-        foreach($array as $value)
-        {
-            if ($value !== $testValue)
-                return false;
-        }
-        return true;
-    }
-
    function filter_releases($releases, $constraint)
     {
         if (test_array_values($constraint))
