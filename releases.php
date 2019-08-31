@@ -1,5 +1,6 @@
 <?php namespace download\releases;
 
+    include "globals.php";
     include "helpers.php";
 
     $format_map = array();
