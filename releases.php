@@ -258,12 +258,12 @@
 
     function parse_tags()
     {
+        global $release_map;
+
         if (count($release_map) > 0)
             return $release_map;
 
         $tags = read_tags();
-
-        global $release_map;
 
         $release_map = array(
             "date" => array(),
