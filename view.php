@@ -140,7 +140,7 @@
         $deviceLong = $release->getLongDeviceName();
         $model = $release->getDeviceModel();
 
-        $github_org_url = "https://github.com/Galaxy-MSM8916";
+        $github_org_url = $GLOBALS['cfg']['github_org_url'];
 
         $device_tree_url = "${github_org_url}/android_device_samsung_${device}";
         $kernel_tree_url = "${github_org_url}/android_kernel_samsung_msm8916";
@@ -293,7 +293,7 @@ EOF;
                 <a href="?view=downloads">View build downloads</a>
                 <a href="https://jenkins.msm8916.com">Jenkins CI</a>
                 <a href="https://review.msm8916.com">Gerrit Code Review</a>
-                <a href="https://github.com/Galaxy-MSM8916">GitHub Page</a>
+                <a href="{$GLOBALS['cfg']['github_org_url']}">GitHub Page</a>
             </div>
         </div>
 EOF;

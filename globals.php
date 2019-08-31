@@ -6,5 +6,7 @@
 
     $cfg['releases']["update_interval"] = 3600; //interval in seconds
 
+    $cfg['github_org_url'] = "https://github.com/Galaxy-MSM8916";
+
 ?>
 
