@@ -81,6 +81,8 @@
         elseif ($_GET["sort"] == "desc")
             arsort($keys);
 
+        echo indent(2) . "<script type='text/javascript'>document.getElementById('sort_group_div').hidden = false</script>\n";
+
         echo indent(2) . "<div id = 'build_div' class = 'div'>\n";
 
         foreach($keys as $key)

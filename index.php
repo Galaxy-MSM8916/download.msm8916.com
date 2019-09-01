@@ -33,45 +33,45 @@
         -->
     </header>
 
-<?php if ($_GET["view"] == "downloads" && ($_GET["tag"] == null)) { ?>
-    <hr id="header_hr">
-    <table id="nav_group" class="unorderedList">
-        <tr>
-            <td> <span>Group by:</span> </td>
-            <td id="nav_groupByDate">
-                <a href='<?= build_query_from_get(array("groupBy" => "date")) ?>'>Date</a>
-            </td>
-            <td id="nav_separator"> | </td>
-            <td id="nav_groupByDevice">
-                <a href='<?= build_query_from_get(array("groupBy" => "device")) ?>'>Device</a>
-            </td>
-            <td id="nav_separator"> | </td>
-            <td id="nav_groupByDistribution">
-                <a href='<?= build_query_from_get(array("groupBy" => "dist")) ?>'>Distribution</a>
-            </td>
-            <td id="nav_separator"> | </td>
-            <td id="nav_groupByVersion">
-                <a href='<?= build_query_from_get(array("groupBy" => "version")) ?>'>Version</a>
-            </td>
-            <td id="nav_separator"> | </td>
-            <td id="nav_groupByDownloads">
-                <a href='<?= build_query_from_get(array("groupBy" => "downloads")) ?>'>Downloads</a>
-            </td>
-        </tr>
-    </table>
-    <table id="nav_sort" class="unorderedList">
-        <tr>
-            <td> <span>Sort:</span> </td>
-            <td id="nav_SortAsc">
-                <a href='<?= build_query_from_get(array("sort" => "asc")) ?>'>Ascending order</a>
-            </td>
-            <td id="nav_separator"> | </td>
-            <td id="nav_SortDesc">
-                <a href='<?= build_query_from_get(array("sort" => "desc")) ?>'>Descending order</a>
-            </td>
-        </tr>
-    </table>
-<?php } ?> 
+    <div id="sort_group_div" hidden="true">
+        <hr id="header_hr">
+        <table id="nav_group" class="unorderedList">
+            <tr>
+                <td> <span>Group by:</span> </td>
+                <td id="nav_groupByDate">
+                    <a href='<?= build_query_from_get(array("groupBy" => "date")) ?>'>Date</a>
+                </td>
+                <td id="nav_separator"> | </td>
+                <td id="nav_groupByDevice">
+                    <a href='<?= build_query_from_get(array("groupBy" => "device")) ?>'>Device</a>
+                </td>
+                <td id="nav_separator"> | </td>
+                <td id="nav_groupByDistribution">
+                    <a href='<?= build_query_from_get(array("groupBy" => "dist")) ?>'>Distribution</a>
+                </td>
+                <td id="nav_separator"> | </td>
+                <td id="nav_groupByVersion">
+                    <a href='<?= build_query_from_get(array("groupBy" => "version")) ?>'>Version</a>
+                </td>
+                <td id="nav_separator"> | </td>
+                <td id="nav_groupByDownloads">
+                    <a href='<?= build_query_from_get(array("groupBy" => "downloads")) ?>'>Downloads</a>
+                </td>
+            </tr>
+        </table>
+        <table id="nav_sort" class="unorderedList">
+            <tr>
+                <td> <span>Sort:</span> </td>
+                <td id="nav_SortAsc">
+                    <a href='<?= build_query_from_get(array("sort" => "asc")) ?>'>Ascending order</a>
+                </td>
+                <td id="nav_separator"> | </td>
+                <td id="nav_SortDesc">
+                    <a href='<?= build_query_from_get(array("sort" => "desc")) ?>'>Descending order</a>
+                </td>
+            </tr>
+        </table>
+    </div>
 
     <div id="body_div" class = "div">
         <hr id="body_hr">
