@@ -52,14 +52,27 @@
         return $ret;
     }
 
-    function print_releases($groupBy, $relGroup, $constraint)
+    function print_releases($constraint = null)
     {
+        if ($constraint == null)
+        {
+            $constraint = array(
+                "date" => $_GET["date"],
+                "device" => $_GET["device"],
+                "dist" => $_GET["dist"],
+                "downloads" => $_GET["downloads"],
+                "version" => $_GET["version"]
+            );
+        }
+
         $group = $_GET["groupBy"];
 
         if ($group == null)
             $group = "device";
 
-        echo indent(2) . "<div id = 'build_div' class = 'div'>\n";
+        $maps = \download\releases\parse_github_releases();
+
+        $relGroup = $maps[$group];
 
         $keys = array_keys($relGroup);
 
@@ -67,6 +80,8 @@
             asort($keys);
         elseif ($_GET["sort"] == "desc")
             arsort($keys);
+
+        echo indent(2) . "<div id = 'build_div' class = 'div'>\n";
 
         foreach($keys as $key)
         {
@@ -269,33 +284,6 @@ EOF;
         return $constraint;
     }
 
-    function list_releases($constraint = null)
-    {
-        // get and parse tags
-        $maps = \download\releases\parse_github_releases();
-
-        if ($constraint == null)
-        {
-            $constraint = array(
-                "date" => $_GET["date"],
-                "device" => $_GET["device"],
-                "dist" => $_GET["dist"],
-                "downloads" => $_GET["downloads"],
-                "version" => $_GET["version"]
-            );
-        }
-
-        if (null !== ($case = $_GET["groupBy"]))
-        {
-            print_releases($case, $maps[$case], $constraint);
-        }
-        else
-        {
-            $case = "device";
-            print_releases($case, $maps[$case], $constraint);
-        }
-    }
-
     function print_home()
     {
         echo <<<EOF
@@ -332,7 +320,7 @@ EOF;
                 if (null != ($tag = $_GET["tag"]))
                     list_release_artifacts($tag);
                 else
-                    list_releases();
+                    print_releases();
 
                 break;
             }
@@ -358,7 +346,7 @@ EOF;
                     $constraint = parse_old_download_url();
 
                     if (count($constraint) > 0)
-                        list_releases($constraint);
+                        print_releases($constraint);
                     else
                         print_404();
                 }
