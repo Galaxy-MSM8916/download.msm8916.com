@@ -2,11 +2,6 @@
 
     include "releases.php";
 
-    function get_script_base_url()
-    {
-        return $_SERVER["REQUEST_SCHEME"] . "://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER["SCRIPT_NAME"]);
-    }
-
     function get_stylesheet()
     {
         $style = get_script_base_url() . "/css/style.css";
@@ -30,26 +25,6 @@
             $link = "<a href='?". $_SERVER["QUERY_STRING"] . "'>${text}</a>";
 
         return $link;
-    }
-
-    // memoization for the indentation
-    $ind = array();
-
-    function indent($num = 1)
-    {
-        global $ind;
-
-        if ($ind[$num])
-            return $ind[$num];
-
-        $ret = "";
-
-        for ($i = 0; $i < $num; $i++)
-            $ret = $ret . "    ";
-
-        $ind[$num] = $ret;
-
-        return $ret;
     }
 
     function print_releases($constraint = null)

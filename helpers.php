@@ -40,4 +40,29 @@ function build_query_from_get($queries = null)
     return '?' . htmlspecialchars(http_build_query($query_data));
 }
 
+function get_script_base_url()
+{
+    return $_SERVER["REQUEST_SCHEME"] . "://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER["SCRIPT_NAME"]);
+}
+
+// memoization for the indentation
+$ind = array();
+
+function indent($num = 1)
+{
+    global $ind;
+
+    if ($ind[$num])
+        return $ind[$num];
+
+    $ret = "";
+
+    for ($i = 0; $i < $num; $i++)
+        $ret = $ret . "    ";
+
+    $ind[$num] = $ret;
+
+    return $ret;
+}
+
 ?>
