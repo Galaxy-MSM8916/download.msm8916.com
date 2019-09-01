@@ -9,14 +9,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title></title>
-    <link rel="stylesheet" href='<?php echo view\get_stylesheet() ?>'>
+    <link rel="stylesheet" href='<?php echo get_stylesheet() ?>'>
 </head>
 
 <body>
     <header>
         <div id="top_nav" class="top_nav">
             <!-- create the navbar-->
-                <h1 id = "hostname"><a href="<?php echo view\get_script_base_url() ?>"><?php echo $_SERVER["HTTP_HOST"] ?></a></h1>
+                <h1 id = "hostname"><a href="<?php echo get_script_base_url() ?>"><?php echo $_SERVER["HTTP_HOST"] ?></a></h1>
                 <a id="nav_downloads" href="?view=downloads">Downloads</a>
                 <a id="nav_home" href="?view=home">Home</a>
                 <!--
@@ -75,9 +75,9 @@
 
     <div id="body_div" class = "div">
         <hr id="body_hr">
-        <script src='<?php echo view\get_script_base_url() . "/js/main.js"?>' type='text/javascript'></script>
+        <script src='<?php echo get_script_base_url() . "/js/main.js"?>' type='text/javascript'></script>
         <?php
-            view\generate_view();
+            generate_view();
         ?>
     </div>
 

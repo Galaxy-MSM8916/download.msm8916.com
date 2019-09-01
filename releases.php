@@ -1,4 +1,4 @@
-<?php namespace download\releases;
+<?php namespace download;
 
     include "globals.php";
     include "helpers.php";

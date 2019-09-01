@@ -1,4 +1,4 @@
-<?php namespace download\view;
+<?php namespace download;
 
     include "releases.php";
 
@@ -70,7 +70,7 @@
         if ($group == null)
             $group = "device";
 
-        $maps = \download\releases\parse_github_releases();
+        $maps = parse_github_releases();
 
         $relGroup = $maps[$group];
 
@@ -87,7 +87,7 @@
 
         foreach($keys as $key)
         {
-            $releases = \download\releases\filter_releases($relGroup[$key], $constraint);
+            $releases = filter_releases($relGroup[$key], $constraint);
 
             if (count($releases) == 0)
                 continue;
@@ -158,7 +158,7 @@
     function list_release_artifacts($tag)
     {
         // get and parse tags
-        $maps = \download\releases\parse_github_releases();
+        $maps = parse_github_releases();
 
         $release = $maps["tag"][$tag][0];
 
@@ -238,7 +238,7 @@ EOF;
     function parse_old_download_url()
     {
         // get and parse tags
-        $maps = \download\releases\parse_github_releases();
+        $maps = parse_github_releases();
 
         $prefix_len = strlen($_SERVER["CONTEXT_PREFIX"]);
 
