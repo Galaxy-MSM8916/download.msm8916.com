@@ -2,7 +2,7 @@
 
 function get_link($url, $text)
 {
-    $s = "<a href=\"$url\" >$text</a>\n";
+    $s = "<a href=\"$url\" >$text</a>";
 
     return $s;
 }
