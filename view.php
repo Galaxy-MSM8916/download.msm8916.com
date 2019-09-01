@@ -60,6 +60,16 @@
 
         echo indent(2) . "<div id = 'build_div' class = 'div'>\n";
 
+        $headings = array(
+            "Build",
+            "dist" => "Distribution",
+            "version" => "Version",
+            "device" => "Device",
+            "date" => "Date",
+            "downloads" => "Downloads",
+            "",
+        );
+
         foreach($keys as $key)
         {
             $releases = filter_releases($relGroup[$key], $constraint);
@@ -68,59 +78,42 @@
                 continue;
 
             echo indent(3) . "<h2>" . get_release_query_link($group, $key) . "</h2>" . PHP_EOL;
-
             echo indent(3) . "<table class = 'build_folder'>\n";
-
             echo indent(4) . "<tr class = 'header_tr'>\n";
 
-            if ($group != "dist")
-                echo indent(5) . "<th>Distribution</th>\n";
+            foreach(array_keys($headings) as $hkey)
+            {
+                $value = $headings[$hkey];
 
-            if ($group != "version")
-                echo indent(5) . "<th>Version</th>\n";
-
-            echo indent(5) . "<th>Build</th>\n";
-
-            if ($group != "device")
-                echo indent(5) . "<th>Device</th>\n";
-
-            if ($group != "date")
-                echo indent(5) . "<th>Date</th>\n";
-
-            if ($group != "downloads")
-                echo indent(5) . "<th>Downloads</th>\n";
-
-            echo indent(5) . "<th></th>\n";
+                if (is_int($hkey) || $group != $hkey)
+                    echo indent(5) . "<th>${value}</th>\n";
+            }
 
             echo indent(4) . "</tr>\n";
 
             foreach($releases as $release)
             {
 
-                $tag = $release->tag;
-                
+                $cells = array(
+                    $release->getBuildNum(),
+                    "dist" => $release->getLongDist(),
+                    "version" => $release->getVersion(),
+                    "device" => $release->getDevice(),
+                    "date" => $release->getDate(),
+                    $release->getDownloads(),
+                );
 
                 echo indent(4) . "<tr class = 'build_tr'>\n";
 
-                if ($group != "dist")
-                    echo indent(5) . "<td class='build_dist'>" . get_release_query_link("dist", $release->getLongDist()) . "</td>\n";
+                foreach(array_keys($cells) as $ckey)
+                {
+                    if (is_int($ckey))
+                        echo indent(5) . "<td>" . $cells[$ckey] . "</td>\n";
+                    elseif ($group != $ckey)
+                        echo indent(5) . "<td>" . get_release_query_link($ckey, $cells[$ckey]) . "</td>\n";
+                }
 
-                if ($group != "version")
-                    echo indent(5) . "<td class='build_version'>"
-                    . get_release_query_link("version", $release->getVersion()) . "</td>\n";
-
-                echo indent(5) . "<td class='build_number'>" . $release->getBuildNum() . "</td>\n";
-
-                if ($group != "device")
-                    echo indent(5) . "<td class='build_device'>" . get_release_query_link("device", $release->getDevice()) . "</td>\n";
-
-                if ($group != "date")
-                    echo indent(5) . "<td class='build_date'>" . get_release_query_link("date", $release->getDate()) . "</td>\n";
-
-                if ($group != "downloads")
-                    echo indent(5) . "<td class='build_downloads'>" . $release->getDownloads() . "</td>\n";
-
-                $tag_link = "<a class = 'release_url' href='?view=downloads&amp;tag=$tag'>View</a>";
+                $tag_link = get_link(htmlspecialchars("?view=downloads&tag={$release->tag}"), "View");
                 echo indent(5) . "<td class='build_dl_link'>" . $tag_link . "</td>\n";
 
                 echo indent(4) . "</tr>\n";
