@@ -33,34 +33,45 @@
         -->
     </header>
 
-<?php
-if ($_GET["view"] == "downloads" && ($_GET["tag"] == null))
-echo <<<EOF
+<?php if ($_GET["view"] == "downloads" && ($_GET["tag"] == null)) { ?>
     <hr id="header_hr">
     <table id="nav_group" class="unorderedList">
         <tr>
             <td> <span>Group by:</span> </td>
-            <td id="nav_groupByDate"> <a href="?{$_SERVER["QUERY_STRING"]}&amp;groupBy=date">Date</a></td>
+            <td id="nav_groupByDate">
+                <a href='<?= build_query_from_get(array("groupBy" => "date")) ?>'>Date</a>
+            </td>
             <td id="nav_separator"> | </td>
-            <td id="nav_groupByDevice"> <a href="?{$_SERVER["QUERY_STRING"]}&amp;groupBy=device">Device</a></td>
+            <td id="nav_groupByDevice">
+                <a href='<?= build_query_from_get(array("groupBy" => "device")) ?>'>Device</a>
+            </td>
             <td id="nav_separator"> | </td>
-            <td id="nav_groupByDistribution"> <a href="?{$_SERVER["QUERY_STRING"]}&amp;groupBy=dist">Distribution</a></td>
+            <td id="nav_groupByDistribution">
+                <a href='<?= build_query_from_get(array("groupBy" => "dist")) ?>'>Distribution</a>
+            </td>
             <td id="nav_separator"> | </td>
-            <td id="nav_groupByVersion"> <a href="?{$_SERVER["QUERY_STRING"]}&amp;groupBy=version">Version</a></td>
+            <td id="nav_groupByVersion">
+                <a href='<?= build_query_from_get(array("groupBy" => "version")) ?>'>Version</a>
+            </td>
             <td id="nav_separator"> | </td>
-            <td id="nav_groupByDownloads"> <a href="?{$_SERVER["QUERY_STRING"]}&amp;groupBy=downloads">Downloads</a></td>
+            <td id="nav_groupByDownloads">
+                <a href='<?= build_query_from_get(array("groupBy" => "downloads")) ?>'>Downloads</a>
+            </td>
         </tr>
     </table>
     <table id="nav_sort" class="unorderedList">
         <tr>
             <td> <span>Sort:</span> </td>
-            <td id="nav_sortAsc"> <a href="?{$_SERVER["QUERY_STRING"]}&amp;sort=asc">Ascending order</a></td>
+            <td id="nav_SortAsc">
+                <a href='<?= build_query_from_get(array("sort" => "asc")) ?>'>Ascending order</a>
+            </td>
             <td id="nav_separator"> | </td>
-            <td id="nav_sortDesc"> <a href="?{$_SERVER["QUERY_STRING"]}&amp;sort=desc">Descending order</a></td>
+            <td id="nav_SortDesc">
+                <a href='<?= build_query_from_get(array("sort" => "desc")) ?>'>Descending order</a>
+            </td>
         </tr>
     </table>
-EOF;
-?>
+<?php } ?> 
 
     <div id="body_div" class = "div">
         <hr id="body_hr">

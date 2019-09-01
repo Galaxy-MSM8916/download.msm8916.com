@@ -30,4 +30,14 @@ function test_array_values($array, $testValue = null)
     return true;
 }
 
+function build_query_from_get($queries = null)
+{
+    if ($queries !== null)
+        $query_data = array_merge($_GET, $queries);
+    else
+        $query_data = $_GET;
+
+    return '?' . htmlspecialchars(http_build_query($query_data));
+}
+
 ?>
