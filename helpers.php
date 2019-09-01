@@ -7,18 +7,6 @@ function get_link($url, $text)
     return $s;
 }
 
-function add_value_to_2d_arr(&$arr, $key, &$value)
-{
-    // add value to 2d array. does not check for
-    // dups in 2nd level array.
-    if ($arr[$key] == null)
-    {
-        $arr[$key] = array();
-    }
-
-    $arr[$key][] = $value;
-}
-
 /* Return true iff all array values are equal to $testValue */
 function test_array_values($array, $testValue = null)
 {

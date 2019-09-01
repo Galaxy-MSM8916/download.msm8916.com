@@ -449,12 +449,12 @@
                     $rel->add_artifact($name, $size, $download_count, $download_url);
                 }
 
-                add_value_to_2d_arr($release_map["date"], $rel->getDate(), $rel);
-                add_value_to_2d_arr($release_map["downloads"], $rel->getDownloads(), $rel);
-                add_value_to_2d_arr($release_map["dist"], $rel->getLongDist(), $rel);
-                add_value_to_2d_arr($release_map["version"], $rel->getVersion(), $rel);
-                add_value_to_2d_arr($release_map["device"], $rel->getDevice(), $rel);
-                add_value_to_2d_arr($release_map["tag"], $tag, $rel);
+                $release_map["date"][$rel->getDate()][] = $rel;
+                $release_map["downloads"][$rel->getDownloads()][] = $rel;
+                $release_map["dist"][$rel->getLongDist()][] = $rel;
+                $release_map["version"][$rel->getVersion()][] = $rel;
+                $release_map["device"][$rel->getDevice()][] = $rel;
+                $release_map["tag"][$tag][] = $rel;
             }
         }
         return $release_map;
