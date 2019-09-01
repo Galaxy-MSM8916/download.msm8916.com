@@ -118,7 +118,7 @@
                     echo indent(5) . "<td class='build_date'>" . get_release_query_link("date", $release->getDate()) . "</td>\n";
 
                 if ($group != "downloads")
-                    echo indent(5) . "<td class='build_downloads'>" . get_release_query_link("downloads", $release->getDownloads()) . "</td>\n";
+                    echo indent(5) . "<td class='build_downloads'>" . $release->getDownloads() . "</td>\n";
 
                 $tag_link = "<a class = 'release_url' href='?view=downloads&amp;tag=$tag'>View</a>";
                 echo indent(5) . "<td class='build_dl_link'>" . $tag_link . "</td>\n";
