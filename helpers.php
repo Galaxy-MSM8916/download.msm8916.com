@@ -1,6 +1,6 @@
 <?php
 
-function get_link_elem($url, $text)
+function get_link($url, $text)
 {
     $s = "<a href=\"$url\" >$text</a>\n";
 
