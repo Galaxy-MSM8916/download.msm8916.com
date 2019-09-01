@@ -45,12 +45,10 @@ function get_script_base_url()
     return $_SERVER["REQUEST_SCHEME"] . "://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER["SCRIPT_NAME"]);
 }
 
-// memoization for the indentation
-$ind = array();
-
 function indent($num = 1)
 {
-    global $ind;
+    // memoization for the indentation
+    static $ind = array();
 
     if ($ind[$num])
         return $ind[$num];
