@@ -14,19 +14,6 @@
         echo "<link rel='stylesheet' href='$style'>";
     }
 
-    function get_release_query_link($key, $value, $text = null)
-    {
-        if ($text == null)
-            $text = $value;
-
-        if ($_GET[$key] == null)
-            $link = "<a href='?". $_SERVER["QUERY_STRING"] . "&amp;${key}=${value}'>${text}</a>";
-        else
-            $link = "<a href='?". $_SERVER["QUERY_STRING"] . "'>${text}</a>";
-
-        return $link;
-    }
-
     function print_releases($constraint = null)
     {
         if ($constraint == null)
@@ -77,7 +64,9 @@
             if (count($releases) == 0)
                 continue;
 
-            echo indent(3) . "<h2>" . get_release_query_link($group, $key) . "</h2>" . PHP_EOL;
+            $q = build_query_from_get(array($group => $key));
+
+            echo indent(3) . "<h2>" . get_link($q, $key) . "</h2>" . PHP_EOL;
             echo indent(3) . "<table class = 'build_folder'>\n";
             echo indent(4) . "<tr class = 'header_tr'>\n";
 
@@ -110,7 +99,10 @@
                     if (is_int($ckey))
                         echo indent(5) . "<td>" . $cells[$ckey] . "</td>\n";
                     elseif ($group != $ckey)
-                        echo indent(5) . "<td>" . get_release_query_link($ckey, $cells[$ckey]) . "</td>\n";
+                    {
+                        $q = build_query_from_get(array($ckey => $cells[$ckey]));
+                        echo indent(5) . "<td>" . get_link($q, $cells[$ckey]) . "</td>\n";
+                    }
                 }
 
                 $tag_link = get_link(htmlspecialchars("?view=downloads&tag={$release->tag}"), "View");
