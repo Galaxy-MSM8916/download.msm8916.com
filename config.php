@@ -10,5 +10,11 @@
 
     $cfg['github_org_url'] = "https://github.com/Galaxy-MSM8916";
 
+    /* database information */
+    $cfg['db']['host'] = 'localhost';
+    // $cfg['db']['username']
+    // $cfg['db']['password']
+    $cfg['db']['schema'] = 'download_msm89xx';
+
 ?>
 
