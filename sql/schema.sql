@@ -104,7 +104,7 @@ CREATE TABLE artifact (
     build_id int NOT NULL,
     type_id int DEFAULT 1,
     download_count int DEFAULT 0,
-    file_name VARCHAR(50),
+    file_name VARCHAR(100),
     download_url VARCHAR(512),
     PRIMARY KEY (artifact_id),
     INDEX USING BTREE (download_count),
