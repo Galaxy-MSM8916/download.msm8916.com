@@ -139,6 +139,7 @@ CREATE VIEW devices AS
 
 CREATE VIEW dists AS
     SELECT
+        dist.dist_id as dist_id,
         dist.tag_prefix as tag_prefix,
         dist.name_short as name_short,
         dist.name_long as name_long,
