@@ -68,7 +68,7 @@ CREATE TABLE dist (
 -- could not create a table with name 'release', opted for 'build' instead --
 CREATE TABLE build (
     build_id int NOT NULL AUTO_INCREMENT,
-    build_tag VARCHAR(60) NOT NULL,
+    build_tag VARCHAR(100) NOT NULL,
     build_date DATE DEFAULT NULL,
     build_version VARCHAR(15),
     build_channel VARCHAR(15) DEFAULT NULL,
