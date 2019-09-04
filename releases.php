@@ -1,6 +1,6 @@
 <?php namespace download;
 
-    include "globals.php";
+    include "config.php";
     include "helpers.php";
 
     $format_map = array();
