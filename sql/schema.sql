@@ -157,6 +157,7 @@ CREATE VIEW dists AS
 
 CREATE VIEW artifacts AS
     SELECT
+        artifact.build_id as build_id,
         artifact.artifact_id as artifact_id,
         artifact.file_name as file_name,
         artifact.file_size as file_size,
