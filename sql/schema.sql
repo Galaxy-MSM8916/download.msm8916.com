@@ -155,7 +155,7 @@ CREATE VIEW dists AS
     JOIN tag_format ON dist.format_id = tag_format.format_id
 ;
 
-CREATE VIEW artfifacts AS
+CREATE VIEW artifacts AS
     SELECT
         artifact.artifact_id as artifact_id,
         artifact.file_name as file_name,
