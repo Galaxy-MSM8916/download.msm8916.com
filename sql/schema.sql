@@ -108,6 +108,7 @@ CREATE TABLE artifact (
     download_url VARCHAR(512),
     PRIMARY KEY (artifact_id),
     INDEX USING BTREE (download_count),
+    UNIQUE INDEX idx_file USING BTREE (file_name, file_size),
     CONSTRAINT FOREIGN KEY (build_id)
         REFERENCES build(build_id)
         ON DELETE CASCADE
