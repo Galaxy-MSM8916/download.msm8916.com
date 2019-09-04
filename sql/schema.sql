@@ -71,6 +71,7 @@ CREATE TABLE build (
     build_tag VARCHAR(60) NOT NULL,
     build_date DATE DEFAULT NULL,
     build_version VARCHAR(15),
+    build_channel VARCHAR(15) DEFAULT NULL,
     build_num int DEFAULT 0,
     last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     variant_id int DEFAULT 1,
