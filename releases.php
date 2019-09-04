@@ -3,6 +3,8 @@
     include "config.php";
     include "helpers.php";
 
+    include "db.php";
+
     $format_map = array();
     $release_map = array();
 
