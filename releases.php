@@ -95,37 +95,6 @@
         return $info;
     }
 
-   function filter_releases($releases, $constraint)
-    {
-        if (test_array_values($constraint))
-            return $releases;
-
-        $ret = array();
-
-        foreach($releases as $release)
-        {
-            $date = $release->getDate();
-            $version = $release->getVersion();
-            $device = $release->getDevice();
-            $dist = $release->getLongDist();
-            $downloads = $release->getDownloads();
-
-            if ($constraint["date"] && $date != $constraint["date"])
-                continue;
-            if ($constraint["version"] && $version != $constraint["version"])
-                continue;
-            if ($constraint["device"] && $device != $constraint["device"])
-                continue;
-            if ($constraint["dist"] && $dist != $constraint["dist"])
-                continue;
-            if ($constraint["downloads"] && $downloads != $constraint["downloads"])
-                continue;
-
-            $ret[] = $release;
-        }
-        return $ret;
-    }
-
     function getSslPage($url) {
 
         $userAgent = "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0";
