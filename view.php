@@ -186,7 +186,8 @@
 
                 echo indent(4) . "</tr>\n";
             }
-            echo indent(3) . "</table>\n";
+            if ($result->num_rows > 0)
+                echo indent(3) . "</table>\n";
         }
         echo indent(2) . "</div>\n";
 
