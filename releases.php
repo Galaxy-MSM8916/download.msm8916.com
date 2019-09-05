@@ -367,6 +367,11 @@
 
     function update_database_entries()
     {
+        $update_interval = $GLOBALS['cfg']['releases']['update_interval'];
+
+        if ($update_interval < 1)
+            return;
+
         $query = "SELECT MAX(last_update) as last_update FROM build;";
 
         $mysqli = connect_to_db();
@@ -384,7 +389,7 @@
                 $diff = $current_time->getTimestamp() - $update_time->getTimestamp();
 
                 // don't update if the update interval hasn't passed yet
-                if ($diff < $GLOBALS['cfg']['releases']['update_interval'])
+                if ($diff < $update_interval)
                     return;
             }
         }
