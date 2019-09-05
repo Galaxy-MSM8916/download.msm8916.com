@@ -34,11 +34,11 @@ INSERT INTO variant (device_id, codename, model, unified, codename_model_extra) 
     -- fortuna devices --
     (2, "fortuna3g", "SM-G530H", false, NULL),
     (2, "fortunave3g", "SM-G530H", false, NULL),
-    (2, "fortunalteub", "SM-G530M", false, "{'fortunalte': ''}"),
-    (2, "gprimeltectc", "SM-G5309W", false, "{'fortunaltectc': ''}"),
-    (2, "gprimeltezt", "SM-G530MU", false, "{'fortunaltezt': ''}"),
-    (2, "gprimeltexx", "SM-G530FZ", false, "{'fortunaltexx': ''}"),
-    (2, "gprimelte", "SM-G530W", true, "{'gprimeltetmo': 'SM-G530T', 'gprimeltemtr': 'SM-G530T1', 'gprimeltecan': 'SM-G530W'}"),
+    (2, "fortunalteub", "SM-G530M", false, "{\"fortunalte\": \"\"}"),
+    (2, "gprimeltectc", "SM-G5309W", false, "{\"fortunaltectc\": \"\"}"),
+    (2, "gprimeltezt", "SM-G530MU", false, "{\"fortunaltezt\": \"\"}"),
+    (2, "gprimeltexx", "SM-G530FZ", false, "{\"fortunaltexx\": \"\"}"),
+    (2, "gprimelte", "SM-G530W", true, "{\"gprimeltetmo\": \"SM-G530T\", \"gprimeltemtr\": \"SM-G530T1\", \"gprimeltecan\": \"SM-G530W\"}"),
     (2, "gprimeltetfnvzw", "SM-S920L", false, NULL),
     (2, "gprimeltespr", "SM-G530P", false, NULL),
     -- core prime --
@@ -51,23 +51,23 @@ INSERT INTO variant (device_id, codename, model, unified, codename_model_extra) 
     (5, "gt58ltetmo", "SM-T357T", false, NULL),
     -- a3 devices --
     (6, "a33g", "SM-A300H", false, NULL),
-    (6, "a3lte", "SM-A300F", true, "{'a3ltexx': 'SM-A300F', 'a3ltezt': 'SM-A300YZ', 'a3ltechn': 'SM-A3000', 'a3ltectc': 'SM-A3009', 'a3lteub': 'SM-A300M', 'a3ltezso': 'SM-A300G'}"),
-    (6, "a3ulte", "A300FU", true, "{'a3ultexx': 'SM-A300FU', 'a3ultedv': 'SM-A300Y'}"),
+    (6, "a3lte", "SM-A300F", true, "{\"a3ltexx\": \"SM-A300F\", \"a3ltezt\": \"SM-A300YZ\", \"a3ltechn\": \"SM-A3000\", \"a3ltectc\": \"SM-A3009\", \"a3lteub\": \"SM-A300M\", \"a3ltezso\": \"SM-A300G\"}"),
+    (6, "a3ulte", "A300FU", true, "{\"a3ultexx\": \"SM-A300FU\", \"a3ultedv\": \"SM-A300Y\"}"),
     -- a5 devices --
     (7, "a5ltechn", "SM-A5000", false, NULL),
     (7, "a5ltectc", "SM-A5009", false, NULL),
     -- j5 devices --
     (8, "j53gxx", "SM-J500H", false, NULL),
     (8, "j5ltechn", "SM-J5008", false, NULL),
-    (8, "j5nlte", "SM-J500FN", false, "{'j5nltexx': ''}"),
-    (8, "j5xnlte", "SM-J510FN", true, "{'j5xnltexx': 'SM-J510FN', 'j5xnltejv': 'SM-J510F', 'j5xnltedx': 'SM-J510GN'}"),
-    (8, "j5lte", "SM-J500F", true, "{'j5ltexx': 'SM-J500F', 'j5ylte': 'SM-J500Y', 'j5lteub': 'SM-J500M', 'j5ltedx': 'SM-J500G'}"),
+    (8, "j5nlte", "SM-J500FN", false, "{\"j5nltexx\": \"\"}"),
+    (8, "j5xnlte", "SM-J510FN", true, "{\"j5xnltexx\": \"SM-J510FN\", \"j5xnltejv\": \"SM-J510F\", \"j5xnltedx\": \"SM-J510GN\"}"),
+    (8, "j5lte", "SM-J500F", true, "{\"j5ltexx\": \"SM-J500F\", \"j5ylte\": \"SM-J500Y\", \"j5lteub\": \"SM-J500M\", \"j5ltedx\": \"SM-J500G\"}"),
     -- j7 devices -- 
     (9, "j7ltespr", "SM-J700P", false, NULL),
     (9, "j7ltechn", "SM-J7008", false, NULL),
     -- on7 devices -- 
-    (10, "o7prolte", "SM-G600FY", false, "{'o7proltedd': ''}"),
-    -- (9, "o7prolte", "SM-G600FY", true, "{'o7proltedd', 'on7ltechn'}", "{'SM-G600FY', 'SM-G6000'}"),
+    (10, "o7prolte", "SM-G600FY", false, "{\"o7proltedd\": \"\"}"),
+    -- (9, "o7prolte", "SM-G600FY", true, "{\"o7proltedd\", \"on7ltechn\"}", "{\"SM-G600FY\", \"SM-G6000\"}"),
     -- serrano devices -- 
     (11, "serranovelte", "SM-I9195I", false, NULL),
     (11, "serranove3g", "SM-I9192I", false, NULL)
