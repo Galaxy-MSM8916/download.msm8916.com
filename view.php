@@ -234,17 +234,83 @@
         $build_num = $build_info['build_num'];
         $build_id = $build_info['build_id'];
         $device_name = $build_info['device_name'];
+        $board_name = $build_info['board_name'];
+        $board_arch = $build_info['board_arch'];
+
+        if (null !== ($extra = $build_info['codename_model_extra']))
+        {
+            $device_model_map = json_decode($extra, true);
+
+            $keys = array_keys($device_model_map);
+
+            $i = 0;
+
+            $codename_extra = "";
+            $model_extra = "";
+
+            while ($i < count($keys) - 1)
+            {
+                $key = $keys[$i];
+                $value = $device_model_map[$key];
+
+                $codename_extra .= "$key / ";
+                if (isset($value) && $value)
+                    $model_extra .= "$value / ";
+
+                $i = $i + 1;
+            }
+            $key = $keys[$i];
+            $value = $device_model_map[$key];
+
+            $codename_extra .= "$key";
+            if (isset($value) && $value)
+                $model_extra .= "$value";
+
+        }
 
         echo <<<EOF
         <div id="release">
-            <h2>{$dist_name_long} {$version} for the {$device_name}</h2>
+            <h2>{$dist_name_long} {$version} for the {$device_name} ($model)</h2>
             <hr />
             <h3>Info:</h3>
             <div id="release_info">
+EOF;
+        if ($build_info['unified'])
+        {
+            echo <<<UNIFIED
+                <p>Unified codename: <span>{$codename}</span></p>
+                <p>Other codenames: <span>{$codename_extra}</span></p>
+                <p>Supported models: <span>{$model_extra}</span></p>
+UNIFIED;
+        }
+        elseif ($extra)
+        {
+            $codename_extra = $codename . " / " . $codename_extra;
+            echo <<<ALIAS
+                <p>Codenames: <span>{$codename_extra}</span></p>
+                <p>Device Model: <span>{$model}</span></p>
+ALIAS;
+        }
+        // don't show for dummy devices
+        elseif ($build_info['variant_id'] > 2)
+        {
+        echo <<<ELSE
                 <p>Device Codename: <span>{$codename}</span></p>
                 <p>Device Model: <span>{$model}</span></p>
+ELSE;
+        }
+        echo <<<DATE
                 <p>Build Date: <span>{$build_date}</span></p>
+DATE;
+        if ($build_num > 0)
+            echo <<<BUILD_NUM
                 <p>Build Number: <span>{$build_num}</span></p>
+BUILD_NUM;
+        echo <<<BOARD
+                <p>Board name: <span>{$board_name}</span></p>
+                <p>Board arch: <span>{$board_arch}</span></p>
+BOARD;
+        echo <<<EOF
             </div>
             <hr />
             <h3>Artifacts:</h3>
@@ -295,10 +361,16 @@ ARTIFACT;
         $result->free();
         $mysqli->close();
 
-        echo <<<EOF
+        echo <<<BEGIN
                 <h3>Other Links: </h3>
                 <div class="other_links">
+BEGIN;
+        // don't show for dummy devices
+        if ($build_info['variant_id'] > 2)
+            echo <<<DTREE
                     <p><a href='${device_tree_url}'>Device tree</a></p>
+DTREE;
+        echo <<<EOF
                     <p><a href='${kernel_tree_url}'>Kernel tree</a></p>
                     <p><a href='${release_url}'>View all artifacts/downloads on GitHub</a></p>
                 <div>
