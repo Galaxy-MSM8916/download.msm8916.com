@@ -94,6 +94,8 @@
             return $gq_result;
         }
 
+        $total_rows = 0;
+
         while(null !== ($gq_row = $gq_result->fetch_assoc()))
         {
             $row_result = $gq_row[$group];
@@ -114,6 +116,8 @@
             /* print heading and table header row*/
             if ($result->num_rows > 0)
             {
+                $total_rows = $total_rows + $result->num_rows;
+
                 $q = build_query_from_get(array($group => $row_result));
 
                 echo indent(3) . "<h2>" . get_link($q, $row_result) . "</h2>" . PHP_EOL;
@@ -177,6 +181,13 @@
             if ($result->num_rows > 0)
                 echo indent(3) . "</table>\n";
         }
+
+        if ($total_rows == 0)
+        {
+            http_response_code(404);
+            echo indent(3) . "<h3>No matching builds found</h3>\n";
+        }
+
         echo indent(2) . "</div>\n";
 
         $result->free();
