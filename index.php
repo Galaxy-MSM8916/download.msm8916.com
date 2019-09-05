@@ -37,25 +37,24 @@
         <hr id="header_hr">
         <table id="nav_group" class="unorderedList">
             <tr>
-                <td> <span>Group by:</span> </td>
-                <td id="nav_groupByDate">
-                    <a href='<?= build_query_from_get(array("groupBy" => "date")) ?>'>Date</a>
+                <td> <span>Group by: </span> </td>
+                <?php
+                    $groupArray = array(
+                        "build_date" => "Build Date",
+                        "codename" => "Device Codename",
+                        "dist_name_short" => "Distribution",
+                        "build_version" => "Version",
+                    );
+                ?> 
+                <?php $keys = array_keys($groupArray);?> 
+                <?php for ($i = 0; $i < count($groupArray) - 1; $i++) { ?> 
+                <td id="nav_groupBy<?=$keys[$i]?>">
+                    <a href='<?= build_query_from_get(array("groupBy" => $keys[$i])) ?>'><?=$groupArray[$keys[$i]]?></a>
                 </td>
                 <td id="nav_separator"> | </td>
-                <td id="nav_groupByDevice">
-                    <a href='<?= build_query_from_get(array("groupBy" => "device")) ?>'>Device</a>
-                </td>
-                <td id="nav_separator"> | </td>
-                <td id="nav_groupByDistribution">
-                    <a href='<?= build_query_from_get(array("groupBy" => "dist")) ?>'>Distribution</a>
-                </td>
-                <td id="nav_separator"> | </td>
-                <td id="nav_groupByVersion">
-                    <a href='<?= build_query_from_get(array("groupBy" => "version")) ?>'>Version</a>
-                </td>
-                <td id="nav_separator"> | </td>
-                <td id="nav_groupByDownloads">
-                    <a href='<?= build_query_from_get(array("groupBy" => "downloads")) ?>'>Downloads</a>
+                <?php } ?> 
+                <td id="nav_groupBy<?=$keys[$i]?>">
+                    <a href='<?= build_query_from_get(array("groupBy" => $keys[$i])) ?>'><?=$groupArray[$keys[$i]]?></a>
                 </td>
             </tr>
         </table>
