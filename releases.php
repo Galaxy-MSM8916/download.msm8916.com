@@ -137,7 +137,8 @@
 
             $handle = false;
 
-            if ($out_dir && is_dir($out_dir))
+            if ($out_dir && is_dir($out_dir)
+                && isset($request_data) && strlen($request_data) > 0)
             {
                 if ($compress)
                     $fpath = "compress.zlib://" . $out_dir . "/" . $count . ".gz";
@@ -148,19 +149,21 @@
             }
 
             // TODO: possibly log write info to a log file
-            if ($handle !== false)
+            if ($handle !== false && isset($request_data)
+                && strlen($request_data) > 0)
             {
                 fwrite($handle, $request_data);
                 fclose($handle);
             }
 
             // decode the json string
-            $pages[$count] = json_decode($request_data, true);
+            if (null !== ($decoded = json_decode($request_data, true)))
+                $pages[$count] = $decoded;
 
             if ($wait_interval > 0)
                 usleep($wait_interval);
         }
-        while (count($pages[$count]) > 0);
+        while (isset($pages[$count]) && count($pages[$count]) > 0);
 
         return $pages;
 
