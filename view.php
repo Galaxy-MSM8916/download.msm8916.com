@@ -296,50 +296,25 @@ EOF;
 
     function parse_old_download_url()
     {
-        // get and parse tags
-        $maps = parse_github_releases();
+        $columns = array(
+            "dist_name_long",
+            "build_version",
+            "codename",
+            "build_date",
+        );
 
-        $prefix_len = strlen($_SERVER["CONTEXT_PREFIX"]);
-
+        $prefix_len = strlen(dirname($_SERVER["SCRIPT_NAME"])) + 1;
         $old_url = substr($_SERVER["REDIRECT_URL"], $prefix_len);
-
         $split_url = explode("/", $old_url);
 
-        $constraint = array();
+        $i = 0;
 
-        foreach ($split_url as $substr)
+        while ($i < count($split_url))
         {
-            if (array_key_exists($new = str_replace("_", " ", $substr), $maps["dist"]))
-                {
-                    $constraint["dist"] = $new;
-                    continue;
-                }
-            elseif (array_key_exists($substr, $maps["version"]))
-                {
-                    if($constraint["dist"])
-                    {
-                        $constraint["version"] = $substr;
-                        continue;
-                    }
-                    else
-                    {
-                        $constraint = null;
-                        break;
-                    }
-                }
-            elseif (array_key_exists($substr, $maps["device"]))
-                {
-                    if($constraint["version"])
-                    {
-                        $constraint["device"] = $substr;
-                        continue;
-                    }
-                    else
-                    {
-                        $constraint = null;
-                        break;
-                    }
-                }
+            if (isset($split_url[$i]) && $split_url[$i])
+                $constraint[$columns[$i]] = $split_url[$i];
+
+            $i = $i + 1;
         }
 
         return $constraint;
