@@ -351,12 +351,14 @@ EOF;
     {
         parse_github_releases();
 
-        switch($case = $_GET["view"])
+        $case = isset($_GET["view"]) ? $_GET["view"] : null;
+
+        switch($case)
         {
             case "downloads":
             {
-                if (null != ($tag = $_GET["tag"]))
-                    list_release_artifacts($tag);
+                if (isset($_GET["tag"]))
+                    list_release_artifacts($_GET["tag"]);
                 else
                     print_releases();
 
@@ -379,7 +381,8 @@ EOF;
             }
             default:
             {
-                if (strlen($_SERVER["REDIRECT_URL"]) > 0)
+                if (isset($_SERVER["REDIRECT_URL"]) &&
+                    strlen($_SERVER["REDIRECT_URL"]) > 0)
                 {
                     $constraint = parse_old_download_url();
 

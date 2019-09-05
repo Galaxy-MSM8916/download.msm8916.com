@@ -10,10 +10,13 @@ function get_link($url, $text)
 /* Return true iff all array values are equal to $testValue */
 function test_array_values($array, $testValue = null)
 {
-    foreach($array as $value)
+    if (isset($array))
     {
-        if ($value !== $testValue)
-            return false;
+        foreach($array as $value)
+        {
+            if ($value !== $testValue)
+                return false;
+        }
     }
     return true;
 }
@@ -38,7 +41,7 @@ function indent($num = 1)
     // memoization for the indentation
     static $ind = array();
 
-    if ($ind[$num])
+    if (isset($ind[$num]))
         return $ind[$num];
 
     $ret = "";
