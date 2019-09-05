@@ -124,6 +124,11 @@
         if ($out_dir && (is_dir($out_dir) == false))
             mkdir($out_dir, 0755, true);
 
+        if (isset($GLOBALS['cfg']['releases']["request_wait_interval"]))
+            $wait_interval = $GLOBALS['cfg']['releases']["request_wait_interval"] * 1000000;
+        else
+            $wait_interval = 0;
+
         do
         {
             $count = $count + 1;
@@ -152,6 +157,8 @@
             // decode the json string
             $pages[$count] = json_decode($request_data, true);
 
+            if ($wait_interval > 0)
+                usleep($wait_interval);
         }
         while (count($pages[$count]) > 0);
 

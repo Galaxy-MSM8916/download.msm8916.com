@@ -8,6 +8,7 @@
     $cfg['releases']["compress"] = true;
 
     $cfg['releases']["update_interval"] = 3600; //interval in seconds
+    $cfg['releases']["request_wait_interval"] = 1; //time to wait between requests in seconds
 
     $cfg['github_org_url'] = "https://github.com/Galaxy-MSM8916";
 
