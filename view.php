@@ -388,7 +388,11 @@ EOF;
             "build_date",
         );
 
-        $prefix_len = strlen(dirname($_SERVER["SCRIPT_NAME"])) + 1;
+        if ("/" == ($d = dirname($_SERVER["SCRIPT_NAME"])))
+            $prefix_len = 1;
+        else
+            $prefix_len = strlen($d) + 1;
+
         $old_url = substr($_SERVER["REDIRECT_URL"], $prefix_len);
         $split_url = explode("/", $old_url);
 
