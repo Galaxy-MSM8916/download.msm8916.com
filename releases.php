@@ -365,8 +365,7 @@
         }
     }
 
-
-    function parse_github_releases()
+    function update_database_entries()
     {
         $query = "SELECT MAX(last_update) as last_update FROM build;";
 

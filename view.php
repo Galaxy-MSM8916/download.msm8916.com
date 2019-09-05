@@ -349,7 +349,7 @@ EOF;
 
     function generate_view()
     {
-        parse_github_releases();
+        update_database_entries();
 
         $case = isset($_GET["view"]) ? $_GET["view"] : null;
 
