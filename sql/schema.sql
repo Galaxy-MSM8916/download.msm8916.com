@@ -167,3 +167,29 @@ CREATE VIEW artifacts AS
     FROM artifact
     JOIN artifact_type ON artifact.type_id = artifact_type.type_id
 ;
+
+CREATE VIEW dist_device_builds AS
+    SELECT
+        build.build_id as build_id,
+        build.dist_id as dist_id,
+        build.build_tag as build_tag,
+        build.build_date as build_date,
+        build.build_version as build_version,
+        build.build_channel as build_channel,
+        build.build_num as build_num,
+        build.last_update as last_update,
+        build.variant_id as variant_id,
+        dist.tag_prefix as tag_prefix,
+        dist.name_short as dist_name_short,
+        dist.name_long as dist_name_long,
+        devices.name as device_name,
+        devices.board_name as board_name,
+        devices.board_arch as board_arch,
+        devices.codename as codename,
+        devices.model as model,
+        devices.unified as unified,
+        devices.codename_model_extra as codename_model_extra
+    FROM build
+    JOIN devices ON build.variant_id=devices.variant_id
+    JOIN dist ON build.dist_id=dist.dist_id
+;
