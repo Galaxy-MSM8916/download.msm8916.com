@@ -2,7 +2,8 @@
 
     include "config.secure.php";
 
-    $cfg['releases']['request_url'] = "https://api.github.com/repos/Galaxy-MSM8916/releases/releases?page=";
+    $cfg['releases']['request_url'] = "https://api.github.com/repos/"
+        . "Galaxy-MSM8916/releases/releases?per_page=100&page=";
     $cfg['releases']["cache_dir"] = "releases_zlib";
     $cfg['releases']["compress"] = true;
 
