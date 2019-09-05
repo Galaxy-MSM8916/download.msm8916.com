@@ -7,13 +7,13 @@ INSERT INTO board (board_id, board_name, board_arch) values
 
 -- dummy device for unrecognised or non-ROM/Boot/Recovery images
 INSERT INTO device (device_id, name) values
-    (1, "Samsung Galaxy device")
+    (1, "Samsung Galaxy devices")
 ;
 
 -- dummy variant for unrecognised or non-ROM/Boot/Recovery images
 INSERT INTO variant (variant_id, device_id, codename, model, board_id) values
-    (1, 1, "generic_msm8916", "generic", 1),
-    (2, 1, "generic_msm8953", "generic", 2)
+    (1, 1, "all (arm)", "all (arm)", 1),
+    (2, 1, "all (arm64)", "all (arm64)", 2)
 ;
 
 -- The rest of the devices
