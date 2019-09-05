@@ -32,20 +32,11 @@
         /* construct constraints */
         if ($constraint == null)
         {
-            if (isset($_GET["date"]))
-                $constraint["build_date"] = $_GET["date"];
-
-            if (isset($_GET["device"]))
-                $constraint["codename"] = $_GET["device"];
-
-            if (isset($_GET["dist"]))
-                $constraint["dist_name_short"] = $_GET["dist"];
-
-            //if (isset($_GET["downloads"]))
-            //    $constraint["dist_name_short"] = $_GET["downloads"];
-
-            if (isset($_GET["version"]))
-                $constraint["build_version"] = $_GET["version"];
+            foreach(array_keys($valid_group) as $key)
+            {
+            if (isset($_GET[$key]))
+                $constraint[$key] = $_GET[$key];
+            }
         }
 
         $mysqli = connect_to_db();
@@ -383,7 +374,7 @@ EOF;
     function parse_old_download_url()
     {
         $columns = array(
-            "dist_name_long",
+            "dist_name_short",
             "build_version",
             "codename",
             "build_date",
