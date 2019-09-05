@@ -64,10 +64,10 @@
 
         $headings = array(
             "Build",
-            "dist" => "Distribution",
-            "version" => "Version",
-            "device" => "Device",
-            "date" => "Date",
+            "dist_name_short" => "Distribution",
+            "build_version" => "Version",
+            "codename" => "Device",
+            "build_date" => "Date",
             "downloads" => "Downloads",
             "",
         );
@@ -160,10 +160,10 @@
 
                 $cells = array(
                     $build_row['build_num'],
-                    "dist" => $build_row['dist_name_short'],
-                    "version" => $build_row['build_version'],
-                    "device" => $build_row['codename'],
-                    "date" => $build_row['build_date'],
+                    "dist_name_short" => $build_row['dist_name_short'],
+                    "build_version" => $build_row['build_version'],
+                    "codename" => $build_row['codename'],
+                    "build_date" => $build_row['build_date'],
                     $download_count,
                 );
 
