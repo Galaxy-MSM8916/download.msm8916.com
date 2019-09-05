@@ -212,7 +212,7 @@
 
         if (null == ($build_info = $result->fetch_assoc()))
         {
-            printf("Failed to query database: %s\n", $mysqli->error);
+            echo "<h3>Could not find build information for tag <i>$tag</i></h3>\n";
             $mysqli->close();
             return false;
         }
