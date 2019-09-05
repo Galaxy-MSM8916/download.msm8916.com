@@ -16,32 +16,47 @@
 
     function print_releases($constraint = null)
     {
+        /* arrays for validation of query input */
+        $valid_group = array(
+            "build_date" => 0,
+            "codename" => 0,
+            "dist_name_short" => 0,
+            "build_version" => 0,
+        );
+
+        $valid_sort = array(
+            "asc" => 0,
+            "desc" => 0
+        );
+
+        /* construct constraints */
         if ($constraint == null)
         {
-            $constraint = array(
-                "date" => $_GET["date"],
-                "device" => $_GET["device"],
-                "dist" => $_GET["dist"],
-                "downloads" => $_GET["downloads"],
-                "version" => $_GET["version"]
-            );
+            if (isset($_GET["date"]))
+                $constraint["build_date"] = $_GET["date"];
+
+            if (isset($_GET["device"]))
+                $constraint["codename"] = $_GET["device"];
+
+            if (isset($_GET["dist"]))
+                $constraint["dist_name_short"] = $_GET["dist"];
+
+            //if (isset($_GET["downloads"]))
+            //    $constraint["dist_name_short"] = $_GET["downloads"];
+
+            if (isset($_GET["version"]))
+                $constraint["build_version"] = $_GET["version"];
         }
 
-        $group = $_GET["groupBy"];
+        $mysqli = connect_to_db();
 
-        if ($group == null)
-            $group = "device";
+        $group = "codename";
 
-        $maps = parse_github_releases();
-
-        $relGroup = $maps[$group];
-
-        $keys = array_keys($relGroup);
-
-        if ($_GET["sort"] == "asc")
-            asort($keys);
-        elseif ($_GET["sort"] == "desc")
-            arsort($keys);
+        if (isset($_GET["groupBy"]))
+        {
+            if (array_key_exists($_GET["groupBy"], $valid_group))
+                $group = $_GET["groupBy"];
+        }
 
         echo indent(2) . "<script type='text/javascript'>document.getElementById('sort_group_div').hidden = false</script>\n";
 
@@ -53,43 +68,90 @@
             "version" => "Version",
             "device" => "Device",
             "date" => "Date",
-            "downloads" => "Downloads",
+            //"downloads" => "Downloads",
             "",
         );
 
-        foreach($keys as $key)
+        /* construct query for use in grouping builds */
+        $group_query = "SELECT DISTINCT $group FROM dist_device_builds";
+
+        if (isset($_GET["sort"]) && array_key_exists($_GET["sort"], $valid_sort))
+            $group_query .= " ORDER BY $group {$_GET['sort']};";
+
+        /* construct sql query for build listings */
+        $build_query = "SELECT * FROM dist_device_builds WHERE";
+
+        if (!test_array_values($constraint))
         {
-            $releases = filter_releases($relGroup[$key], $constraint);
+            $i = 0;
+            $keys = array_keys($constraint);
 
-            if (count($releases) == 0)
-                continue;
-
-            $q = build_query_from_get(array($group => $key));
-
-            echo indent(3) . "<h2>" . get_link($q, $key) . "</h2>" . PHP_EOL;
-            echo indent(3) . "<table class = 'build_folder'>\n";
-            echo indent(4) . "<tr class = 'header_tr'>\n";
-
-            foreach(array_keys($headings) as $hkey)
+            while($i < count($keys))
             {
-                $value = $headings[$hkey];
+                $key = $keys[$i];
+                $value = $mysqli->escape_string($constraint[$key]);
 
-                if (is_int($hkey) || $group != $hkey)
-                    echo indent(5) . "<th>${value}</th>\n";
+                $build_query .= " $key='$value' AND";
+
+                $i = $i + 1;
+            }
+        }
+
+        // run group_query and get result
+        if (false == ($gq_result = $mysqli->query($group_query)))
+        {
+            printf("Failed to query database: %s\n", $mysqli->error);
+
+            $mysqli->close();
+            return $gq_result;
+        }
+
+        while(null !== ($gq_row = $gq_result->fetch_assoc()))
+        {
+            $row_result = $gq_row[$group];
+
+            // finish contructing build_query
+            $final_query = $build_query .
+                " $group='$row_result';";
+
+            // get device info
+            if (false == ($result = $mysqli->query($final_query)))
+            {
+                printf("Failed to query database: %s\n", $mysqli->error);
+
+                $mysqli->close();
+                return $result;
             }
 
-            echo indent(4) . "</tr>\n";
-
-            foreach($releases as $release)
+            /* print heading and table header row*/
+            if ($result->num_rows > 0)
             {
+                $q = build_query_from_get(array($group => $row_result));
 
+                echo indent(3) . "<h2>" . get_link($q, $row_result) . "</h2>" . PHP_EOL;
+                echo indent(3) . "<table class = 'build_folder'>\n";
+                echo indent(4) . "<tr class = 'header_tr'>\n";
+
+                foreach(array_keys($headings) as $hkey)
+                {
+                    $value = $headings[$hkey];
+
+                    if (is_int($hkey) || $group != $hkey)
+                        echo indent(5) . "<th>${value}</th>\n";
+                }
+
+                echo indent(4) . "</tr>\n";
+            }
+
+            while (null !== ($build_row = $result->fetch_assoc()))
+            {
                 $cells = array(
-                    $release->getBuildNum(),
-                    "dist" => $release->getLongDist(),
-                    "version" => $release->getVersion(),
-                    "device" => $release->getDevice(),
-                    "date" => $release->getDate(),
-                    $release->getDownloads(),
+                    $build_row['build_num'],
+                    "dist" => $build_row['dist_name_short'],
+                    "version" => $build_row['build_version'],
+                    "device" => $build_row['codename'],
+                    "date" => $build_row['build_date'],
+                    //$release->getDownloads(),
                 );
 
                 echo indent(4) . "<tr class = 'build_tr'>\n";
@@ -105,7 +167,8 @@
                     }
                 }
 
-                $tag_link = get_link(htmlspecialchars("?view=downloads&tag={$release->tag}"), "View");
+                $tag_link = get_link(htmlspecialchars("?view="
+                    . "downloads&tag={$build_row['build_tag']}"), "View");
                 echo indent(5) . "<td class='build_dl_link'>" . $tag_link . "</td>\n";
 
                 echo indent(4) . "</tr>\n";
@@ -113,39 +176,62 @@
             echo indent(3) . "</table>\n";
         }
         echo indent(2) . "</div>\n";
+
+        $result->free();
+        $mysqli->close();
     }
 
     function list_release_artifacts($tag)
     {
-        // get and parse tags
-        $maps = parse_github_releases();
+        $mysqli = connect_to_db();
 
-        $release = $maps["tag"][$tag][0];
+        // get device info
+        $query = "SELECT * FROM dist_device_builds"
+            . " WHERE build_tag='" . $mysqli->escape_string($tag) . "';";
 
-        $distLong = $release->getLongDist();
-        $version = $release->getVersion();
-        $device = $release->getDevice();
-        $date = $release->getDate();
-        $build = $release->getBuildNum();
-        $deviceLong = $release->getLongDeviceName();
-        $model = $release->getDeviceModel();
+        if (false == ($result = $mysqli->query($query)))
+        {
+            printf("Failed to query database: %s\n", $mysqli->error);
+
+            $mysqli->close();
+            return $result;
+        }
+
+        if (null == ($build_info = $result->fetch_assoc()))
+        {
+            printf("Failed to query database: %s\n", $mysqli->error);
+            $mysqli->close();
+            return false;
+        }
+        $result->free();
 
         $github_org_url = $GLOBALS['cfg']['github_org_url'];
 
-        $device_tree_url = "${github_org_url}/android_device_samsung_${device}";
+        $device_tree_url = "${github_org_url}/android_device_samsung_"
+            . $build_info['codename'];
+
         $kernel_tree_url = "${github_org_url}/android_kernel_samsung_msm8916";
         $release_url = "${github_org_url}/releases/releases/tag/$tag";
 
+        $dist_name_long = $build_info['dist_name_long'];
+        $codename = $build_info['codename'];
+        $model = $build_info['model'];
+        $version = $build_info['build_version'];
+        $build_date = $build_info['build_date'];
+        $build_num = $build_info['build_num'];
+        $build_id = $build_info['build_id'];
+        $device_name = $build_info['device_name'];
+
         echo <<<EOF
         <div id="release">
-            <h2>${distLong} ${version} for the ${deviceLong}</h2>
+            <h2>{$dist_name_long} {$version} for the {$device_name}</h2>
             <hr />
             <h3>Info:</h3>
             <div id="release_info">
-                <p>Device Codename: <span>${device}</span></p>
-                <p>Device Model: <span>${model}</span></p>
-                <p>Build Date: <span>$date</span></p>
-                <p>Build Number: <span>$build</span></p>
+                <p>Device Codename: <span>{$codename}</span></p>
+                <p>Device Model: <span>{$model}</span></p>
+                <p>Build Date: <span>{$build_date}</span></p>
+                <p>Build Number: <span>{$build_num}</span></p>
             </div>
             <hr />
             <h3>Artifacts:</h3>
@@ -155,13 +241,23 @@ EOF;
         $MiB = 1024 * 1024;
         $KiB = 1024;
 
-        foreach($release->getArtifacts() as $artifact)
+        $query = "SELECT * FROM artifacts"
+            . " WHERE build_id='{$build_id}';";
+
+        if (false == ($result = $mysqli->query($query)))
         {
-            $name = $artifact->getName();
-            $size = $artifact->getSize();
-            $download_count = $artifact->getDownloadCount();
-            $download_url = $artifact->getDownloadUrl();
-            $description = $artifact->getDescription();
+            printf("Failed to query database: %s\n", $mysqli->error);
+            $mysqli->close();
+            return $result;
+        }
+
+        while (null !== ($artifact_info = $result->fetch_assoc()))
+        {
+            $name = $artifact_info['file_name'];
+            $size = $artifact_info['file_size'];
+            $download_count = $artifact_info['download_count'];
+            $download_url = $artifact_info['download_url'];
+            $description = $artifact_info['description'];
 
             if ($size > $MiB)
                 $sizeTxt = round($size / $MiB, 2) . " MiB";
@@ -172,16 +268,19 @@ EOF;
 
             echo <<<ARTIFACT
                 <div class="artifact_info">
-                    <a href='${download_url}' title="Download ${description}">
-                        <p>Name: <span>${name}</span></p>
-                        <p>File Type: <span>${description}</span></p>
+                    <a href='{$download_url}' title="Download {$description}">
+                        <p>Name: <span>{$name}</span></p>
+                        <p>File Type: <span>{$description}</span></p>
                         <p>File Size: <span>${sizeTxt}</span></p>
-                        <p>Download Count: <span>${download_count}</span></p>
+                        <p>Download Count: <span>{$download_count}</span></p>
                     </a>
                     <hr />
                 </div>
 ARTIFACT;
         }
+
+        $result->free();
+        $mysqli->close();
 
         echo <<<EOF
                 <h3>Other Links: </h3>
@@ -275,6 +374,8 @@ EOF;
 
     function generate_view()
     {
+        parse_github_releases();
+
         switch($case = $_GET["view"])
         {
             case "downloads":
