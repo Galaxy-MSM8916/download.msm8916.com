@@ -68,7 +68,7 @@
             "version" => "Version",
             "device" => "Device",
             "date" => "Date",
-            //"downloads" => "Downloads",
+            "downloads" => "Downloads",
             "",
         );
 
@@ -145,13 +145,26 @@
 
             while (null !== ($build_row = $result->fetch_assoc()))
             {
+                $dl_query = "SELECT MAX(download_count) as count FROM artifact"
+                  . " JOIN build ON artifact.build_id=build.build_id"
+                  . " WHERE build.build_id={$build_row['build_id']};";
+
+                if (false !== ($dlq_result = $mysqli->query($dl_query)))
+                {
+                    if (null !== ($dl_count_row = $dlq_result->fetch_assoc()))
+                    {
+                        $download_count = $dl_count_row['count'];
+                    }
+                    $dlq_result->free();
+                }
+
                 $cells = array(
                     $build_row['build_num'],
                     "dist" => $build_row['dist_name_short'],
                     "version" => $build_row['build_version'],
                     "device" => $build_row['codename'],
                     "date" => $build_row['build_date'],
-                    //$release->getDownloads(),
+                    $download_count,
                 );
 
                 echo indent(4) . "<tr class = 'build_tr'>\n";
