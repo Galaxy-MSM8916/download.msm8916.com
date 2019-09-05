@@ -1,6 +1,33 @@
 <?php namespace download ?>
 <?php include "view.php"; ?>
 
+<?php
+    $d = dirname($_SERVER["SCRIPT_NAME"]);
+
+    $prefix_len = strlen($d);
+
+    if ($prefix_len > 1)
+        $prefix_len = $prefix_len + 1;
+
+    if (isset($_SERVER["REDIRECT_URL"]))
+        $redirect_path = substr($_SERVER["REDIRECT_URL"], $prefix_len);
+
+    if (isset($redirect_path) && $redirect_path == "update")
+    {
+        if (isset($_GET["token"]) && isset($GLOBALS['cfg']['releases']['update_token'])
+            && ($_GET["token"] == $GLOBALS['cfg']['releases']['update_token']))
+        {
+            update_database_entries();
+        }
+        else
+        {
+            http_response_code(403); //Forbidden
+            echo "Forbidden\n";
+        }
+        die();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 

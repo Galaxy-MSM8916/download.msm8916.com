@@ -438,8 +438,6 @@ EOF;
 
     function generate_view()
     {
-        update_database_entries();
-
         $case = isset($_GET["view"]) ? $_GET["view"] : null;
 
         switch($case)
