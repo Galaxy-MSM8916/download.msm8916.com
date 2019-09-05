@@ -14,7 +14,7 @@
         echo "<link rel='stylesheet' href='$style'>";
     }
 
-    function print_releases($constraint = null)
+    function print_releases()
     {
         /* arrays for validation of query input */
         $valid_group = array(
@@ -30,13 +30,10 @@
         );
 
         /* construct constraints */
-        if ($constraint == null)
+        foreach(array_keys($valid_group) as $key)
         {
-            foreach(array_keys($valid_group) as $key)
-            {
-            if (isset($_GET[$key]))
-                $constraint[$key] = $_GET[$key];
-            }
+        if (isset($_GET[$key]))
+            $constraint[$key] = $_GET[$key];
         }
 
         $mysqli = connect_to_db();
@@ -72,7 +69,7 @@
         /* construct sql query for build listings */
         $build_query = "SELECT * FROM dist_device_builds WHERE";
 
-        if (!test_array_values($constraint))
+        if (isset($constraint) && !test_array_values($constraint))
         {
             $i = 0;
             $keys = array_keys($constraint);
@@ -371,36 +368,6 @@ DTREE;
 EOF;
     }
 
-    function parse_old_download_url()
-    {
-        $columns = array(
-            "dist_name_short",
-            "build_version",
-            "codename",
-            "build_date",
-        );
-
-        if ("/" == ($d = dirname($_SERVER["SCRIPT_NAME"])))
-            $prefix_len = 1;
-        else
-            $prefix_len = strlen($d) + 1;
-
-        $old_url = substr($_SERVER["REDIRECT_URL"], $prefix_len);
-        $split_url = explode("/", $old_url);
-
-        $i = 0;
-
-        while ($i < count($split_url))
-        {
-            if (isset($split_url[$i]) && $split_url[$i])
-                $constraint[$columns[$i]] = $split_url[$i];
-
-            $i = $i + 1;
-        }
-
-        return $constraint;
-    }
-
     function print_home()
     {
         echo <<<EOF
@@ -453,28 +420,17 @@ EOF;
                 //TODO: do something
                 break;
             }
+            default:
+            {
+                if ($case)
+                {
+                    print_404();
+                    break;
+                }
+            }
             case "home":
             {
                 print_home();
-                break;
-            }
-            default:
-            {
-                if (isset($_SERVER["REDIRECT_URL"]) &&
-                    strlen($_SERVER["REDIRECT_URL"]) > 0)
-                {
-                    $constraint = parse_old_download_url();
-
-                    if (count($constraint) > 0)
-                        print_releases($constraint);
-                    else
-                        print_404();
-                }
-                else //default (home) case
-                {
-                    print_home();
-                }
-
                 break;
             }
         }

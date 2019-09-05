@@ -26,6 +26,38 @@
         }
         die();
     }
+    elseif (isset($redirect_path) && !isset($_GET['view']))
+    {
+        $columns = array(
+            "dist_name_short",
+            "build_version",
+            "codename",
+            "build_date",
+        );
+
+        $split_url = explode("/", $redirect_path);
+
+        $i = 0;
+
+        $constraint["view"] = "downloads";
+        while ($i < count($split_url))
+        {
+            if (isset($split_url[$i]) && $split_url[$i])
+                $constraint[$columns[$i]] = $split_url[$i];
+
+            $i = $i + 1;
+        }
+        //$constraint["redirect"] = 1;
+        $location = "Location: " . get_script_base_url();
+
+        if ($prefix_len > 1)
+            $location .= "/";
+
+        $location .= htmlspecialchars_decode(build_query_from_get($constraint));
+
+        header($location);
+        die();
+    }
 ?>
 
 <!DOCTYPE html>
