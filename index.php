@@ -58,6 +58,8 @@
         header($location);
         die();
     }
+    // set caching directives for cdn
+    header("Cache-Control: max-age=7200, stale-while-revalidate=86400");
 ?>
 
 <!DOCTYPE html>
