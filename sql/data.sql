@@ -85,7 +85,9 @@ INSERT INTO tag_format (date_offset, dist_offset, device_offset, build_offset, v
     (5, 0, 6, 4, 1, true, -1),
     (3, 0, 5, 2, 1, true, 4),
     (5, 0, 6, 4, 3, false, -1),
-    (4, 0, 6, 3, 2, true, 5)
+    (4, 0, 6, 3, 2, true, 5),
+    (2, 0, 4, -1, 1, false, 3),
+    (3, 0, 5, -1, 2, false, 4)
 ;
 
 INSERT INTO dist (format_id, tag_prefix, name_short, name_long) values
@@ -97,7 +99,11 @@ INSERT INTO dist (format_id, tag_prefix, name_short, name_long) values
     (3, "dot", "DotOS", "DotOS"),
     (3, "lineage-1", "LineageOS", "LineageOS"),
     (4, "oc_hotplug", "Kernels", "Overclock + Hotplug Kernel"),
-    (5, "lineage-go", "LineageOS_Go", "LineageOS Go")
+    (5, "lineage-go", "LineageOS_Go", "LineageOS Go"),
+    (6, "rr", "ResurrectionRemix", "Resurrection Remix"),
+    (6, "dot", "DotOS", "DotOS"),
+    (6, "lineage-1", "LineageOS", "LineageOS"),
+    (7, "lineage-go", "LineageOS_Go", "LineageOS Go")
 ;
 
 INSERT INTO artifact_type (extension, description) values
