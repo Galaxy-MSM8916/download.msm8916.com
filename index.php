@@ -2,6 +2,16 @@
 <?php include "view.php"; ?>
 
 <?php
+
+    if ($_SERVER['SERVER_NAME'] == "download.msm8916.com")
+    {
+       //redirect to msm8916.com
+       $uri = "https://msm8916.com" . $_SERVER['REQUEST_URI'];
+       header("Location: $uri");// . $uri;
+       die();
+    };
+
+
     $d = dirname($_SERVER["SCRIPT_NAME"]);
 
     $prefix_len = strlen($d);
