@@ -27,7 +27,8 @@ INSERT INTO device (name, release_date) values
     ("Samsung Galaxy J5", '2015-06-01'),
     ("Samsung Galaxy J7", '2015-06-01'),
     ("Samsung Galaxy On7", '2015-10-01'),
-    ("Samsung Galaxy S4 Mini VE", '2015-08-03')
+    ("Samsung Galaxy S4 Mini VE", '2015-08-03'),
+    ("Samsung Galaxy J3", '2016-05-06')
 ;
 
 INSERT INTO variant (device_id, codename, model, unified, codename_model_extra) values
@@ -59,6 +60,7 @@ INSERT INTO variant (device_id, codename, model, unified, codename_model_extra) 
     -- j5 devices --
     (8, "j53gxx", "SM-J500H", false, NULL),
     (8, "j5ltechn", "SM-J5008", false, NULL),
+    (8, "j5xltecmcc", "SM-J5108", false, NULL),
     (8, "j5nlte", "SM-J500FN", false, "{\"j5nltexx\": \"\"}"),
     (8, "j5xnlte", "SM-J510FN", true, "{\"j5xnltexx\": \"SM-J510FN\", \"j5xnltejv\": \"SM-J510F\", \"j5xnltedx\": \"SM-J510GN\"}"),
     (8, "j5lte", "SM-J500F", true, "{\"j5ltexx\": \"SM-J500F\", \"j5ylte\": \"SM-J500Y\", \"j5lteub\": \"SM-J500M\", \"j5ltedx\": \"SM-J500G\"}"),
@@ -67,10 +69,15 @@ INSERT INTO variant (device_id, codename, model, unified, codename_model_extra) 
     (9, "j7ltechn", "SM-J7008", false, NULL),
     -- on7 devices -- 
     (10, "o7prolte", "SM-G600FY", false, "{\"o7proltedd\": \"\"}"),
+    (10, "o7proltechn", "SM-G6000", false, NULL),
     -- (9, "o7prolte", "SM-G600FY", true, "{\"o7proltedd\", \"on7ltechn\"}", "{\"SM-G600FY\", \"SM-G6000\"}"),
     -- serrano devices -- 
     (11, "serranovelte", "SM-I9195I", false, NULL),
-    (11, "serranove3g", "SM-I9192I", false, NULL)
+    (11, "serranove3g", "SM-I9192I", false, NULL),
+    -- j3 devices --
+    (12, "j3ltespr", "SM-J320P", false, NULL),
+    (12, "j3ltectc", "SM-J3109", false, NULL),
+    (12, "j3xprolte", "SM-J3119S", true, "{\"j3xproltectc\": \"SM-J3119\", \"j3xpro6mltechn\": \"SM-J3119S\", \"j3xproltechn\": \"SM-J3110\"\"}")
 ;
 
 INSERT INTO tag_format (date_offset, dist_offset, device_offset, build_offset, version_offset, replace_uscore, channel_offset) values
