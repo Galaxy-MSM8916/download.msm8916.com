@@ -34,24 +34,68 @@
                 $info['dist_id'] = $row['dist_id'];
             
                 if ($row['date_offset'] >= 0)
+                {
                     $info['date'] = $tokens[$row['date_offset']];
 
+                    if ($info['date'] == null)
+                    {
+                        $info = null;
+                        continue;
+                    }
+                }
+
                 if ($row['device_offset'] >= 0)
+                {
                     $info['device'] = $tokens[$row['device_offset']];
+
+                    if ($info['device'] == null)
+                    {
+                        $info = null;
+                        continue;
+                    }
+                }
 
                 if ($row['build_offset'] >= 0)
                 {
                     $info['build'] = $tokens[$row['build_offset']];
 
-                    if ($info['build'][0] == 'j')
+                    if ($info['build'] == null)
+                    {
+                        $info = null;
+                        continue;
+                    }
+                    else if ($info['build'][0] == 'j')
+                    {
                         $info['build'] = substr($info['build'], 1);
+                    }
+                    else
+                    {
+                        $info = null;
+                        continue;
+                    }
                 }
 
                 if ($row['version_offset'] >= 0)
+                {
                     $info['version'] = $tokens[$row['version_offset']];
 
+                    if ($info['version'] == null)
+                    {
+                        $info = null;
+                        continue;
+                    }
+                }
+
                 if ($row['channel_offset'] >= 0)
+                {
                     $info['channel'] = $tokens[$row['channel_offset']];
+
+                    if ($info['device'] == null)
+                    {
+                        $info = null;
+                        continue;
+                    }
+                }
 
                 //if ($row['extra_offset'] >= 0)
                 //    $info['extra'] = $tokens[$row['extra_offset']];
