@@ -239,7 +239,6 @@
     {
 
         $ver = $release_info['version'];
-        $build_num = $release_info['build'];
         $dist_id = $release_info['dist_id'];
         $codename = $release_info['device'];
         $variant_id = $release_info['variant_id'];
@@ -252,6 +251,11 @@
 
         if (isset($release_info['channel']))
             $channel = $release_info['channel'];
+
+        if (isset($release_info['build']))
+            $build_num = $release_info['build'];
+        else
+            $build_num = 0;
 
         $mysqli = connect_to_db();
 
