@@ -21,6 +21,8 @@
 
     if (isset($_SERVER["REDIRECT_URL"]))
         $redirect_path = substr($_SERVER["REDIRECT_URL"], $prefix_len);
+    else if (isset($_SERVER["PATH_INFO"]))
+        $redirect_path = trim($_SERVER["PATH_INFO"], "/");
 
     if (isset($redirect_path) && $redirect_path == "update")
     {
